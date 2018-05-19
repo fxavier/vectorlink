@@ -1,0 +1,49 @@
+CREATE TABLE spray_operator(
+id BIGINT AUTO_INCREMENT,
+sop_code BIGINT NOT NULL,
+name VARCHAR(100) NOT NULL,
+district_id BIGINT NOT NULL,
+active BOOLEAN DEFAULT true,
+PRIMARY KEY(id),
+CONSTRAINT fk_sop_district FOREIGN KEY(district_id) REFERENCES district(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE mobilizer(
+id BIGINT AUTO_INCREMENT,
+mob_code BIGINT NOT NULL,
+name VARCHAR(100) NOT NULL,
+district_id BIGINT NOT NULL,
+active BOOLEAN DEFAULT true,
+PRIMARY KEY(id),
+CONSTRAINT fk_mob_district FOREIGN KEY(district_id) REFERENCES district(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE team_leader(
+id BIGINT AUTO_INCREMENT,
+tl_code BIGINT NOT NULL,
+name VARCHAR(100) NOT NULL,
+district_id BIGINT NOT NULL,
+active BOOLEAN DEFAULT true,
+PRIMARY KEY(id),
+CONSTRAINT fk_tl_district FOREIGN KEY(district_id) REFERENCES district(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE brigade_superviser(
+id BIGINT AUTO_INCREMENT,
+bs_code BIGINT NOT NULL,
+name VARCHAR(100) NOT NULL,
+district_id BIGINT NOT NULL,
+active BOOLEAN DEFAULT true,
+PRIMARY KEY(id),
+CONSTRAINT fk_bs_district FOREIGN KEY(district_id) REFERENCES district(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE iec_assistant(
+id BIGINT AUTO_INCREMENT,
+iec_code BIGINT NOT NULL,
+name VARCHAR(100) NOT NULL,
+district_id BIGINT NOT NULL,
+active BOOLEAN DEFAULT true,
+PRIMARY KEY(id),
+CONSTRAINT fk_iec_district FOREIGN KEY(district_id) REFERENCES district(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

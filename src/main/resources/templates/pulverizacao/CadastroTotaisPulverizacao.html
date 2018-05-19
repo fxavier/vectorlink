@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:vectorlink="http://vectorlink.abt.com">
+
+<head>
+	<title>Cadastro de totais de Pulverizacao</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vectorlinkTotais-table.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1 th:if="${sprayTotals.novo}">Cadastro de totais de pulverizacao</h1>
+					<h1 th:unless="${sprayTotals.novo}" th:text="|Edição de totais ${sprayTotals.id}"></h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-success" th:href="@{/provinces}">
+							<i class="glyphicon  glyphicon-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="POST" th:object="${sprayTotals}" 
+		 th:action="@{sprayTotals.novo} ? @{/totais_pulverizacao/novo} : @{/totais_pulverizacao/{id}(id=${sprayTotals.id})}">
+			<vectorlink:message/>
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">	
+			
+			   			
+				
+			   <div class="col-sm-4  form-group bw-required">
+			      <label for="district" class="control-label" >Distrito</label>
+			       <select id="district" class="form-control" th:field="*{district}">
+			         <option value="">Selecione o distrito</option> 
+			         <option th:each="district : ${districts}" th:value="${district.id}" th:text="${district.name}"></option>
+			       </select> 
+			    </div> 
+			    
+			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="operationalSite">
+			      <label for="operationalSite" class="control-label" >Base Operacional</label>
+			       <select id="operationalSite" class="form-control" th:field="*{operationalSite}">
+			         <option value="">Selecione a base operacional</option> 
+			         <option th:each="operationalSite : ${operationalSites}" th:value="${operationalSite.id}" th:text="${operationalSite.name}"></option>
+			       </select> 
+			    </div> 
+			    
+			    <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="locality">
+			      <label for="locality" class="control-label" >Localidade</label>
+			       <select id="locality" class="form-control" th:field="*{locality}">
+			         <option value="">Selecione a localidade</option> 
+			         <option th:each="locality : ${localities}" th:value="${locality.id}" th:text="${locality.name}"></option>
+			       </select> 
+			    </div> 
+			    
+			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="village">
+			      <label for="village" class="control-label" >Bairro</label>
+			       <select id="village" class="form-control" th:field="*{village}">
+			         <option value="">Selecione a bairro</option> 
+			         <option th:each="villages : ${village}" th:value="${village.id}" th:text="${village.name}"></option>
+			       </select> 
+			    </div> 
+			    
+			    <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="sprayOperator">
+			      <label for="sprayOperator" class="control-label" >Roceador</label>
+			       <select id="sprayOperator" class="form-control" th:field="*{sprayOperator}">
+			         <option value="">Selecione o roceador</option> 
+			         <option th:each="sop : ${sops}" th:value="${sop.id}" th:text="${sop.name}"></option>
+			       </select> 
+			    </div> 
+			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="teamLeader">
+			      <label for="teamLeader" class="control-label" >Chefe de equipa</label>
+			       <select id="teamLeader" class="form-control" th:field="*{teamLeader}">
+			         <option value="">Selecione o Chefe de equipa</option> 
+			         <option th:each="teamLeader : ${teamLeaders}" th:value="${teamLeader.id}" th:text="${teamLeader.name}"></option>
+			       </select> 
+			    </div> 
+				
+			
+			</div>	
+			 <div class="row">								
+				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideIssued">
+					<label for="insecticideIssued" class="control-label">Garrafas de insecticida recebidas</label>
+					<input type="text" class="form-control" id="insecticideIssued" th:field="*{insecticideIssued}"/>
+				</div>
+				
+				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideFullReturned">
+					<label for="insecticideFullReturned" class="control-label">Garrafas cheias devolvidas</label>
+					<input type="text" class="form-control" id="insecticideFullReturned" th:field="*{insecticideFullReturned}"/>
+				
+				</div>
+				
+				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideEmptyReturned">
+					<label for="insecticideEmptyReturned" class="control-label">Garrafas vazias devolvidas</label>
+					<input type="text" class="form-control" id="insecticideEmptyReturned" th:field="*{insecticideEmptyReturned}"/>
+				</div>
+		    </div>	
+		    <div class="row">
+		     <div class="col-xs-12 ui-fluid">
+                    <table class="table table-condensed-extra table-hover table-rensponsive">
+                        <colgroup>
+                          <col span="5">
+                          <col span="5">
+                          <col span="2">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th colspan="5">Pulverizadas</th>
+                            <th colspan="5">Não Pulverizadas</th>
+                            <th colspan="2">Compartimentos Elegiveis</th>
+                          </tr>
+                          <tr class="secondary-headers">
+                            <th>Casas Pulverizadas</th>
+                            <th>Homens</th>
+                            <th>Mulheres</th>
+                            <th>Mulhrs Gravidas</th>
+                            <th>Criancas < 5 anos de idade</th>
+                            <th>Casas nao Pulverizadas</th>
+                            <th>Homens</th>
+                            <th>Mulheres</th>
+                            <th>Mulheres Gravidas</th>
+                            <th>Criancas < 5 anos de idade</th>
+                            <th>Encontrados</th>
+                            <th>Pulverizados</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                          </tr>
+                        </tbody>
+                  </table>
+                </div>
+		    
+		    </div>	
+			
+			
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+		</form>
+	</div>
+</section>
+
+</html>

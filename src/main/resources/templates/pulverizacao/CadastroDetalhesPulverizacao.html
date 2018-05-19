@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:vectorlink="http://vectorlink.abt.com">
+
+<head>
+	<title>Ficha diaria do Roceador</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vectorlinkTotais-table.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1 th:if="${sprayDetails.novo}">Ficha diaria do Roceador</h1>
+					<h1 th:unless="${sprayDetails.novo}" th:text="|Edição de totais ${sprayDetails.id}"></h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-success" th:href="@{/provinces}">
+							<i class="glyphicon  glyphicon-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="POST" th:object="${sprayDetails}" 
+		 th:action="@{sprayDetails.novo} ? @{/detalhes_pulverizacao/novo} : @{/detalhes_pulverizacao/{id}(id=${sprayDetails.id})}">
+			<vectorlink:message/>
+			<input type="hidden" th:field="*{id}" />	
+			<div class="row">
+			 <div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="houseHoldName">
+					<label for="houseHoldName" class="control-label">Chefe do agregado familiar</label>
+					<input type="text" class="form-control" id="houseHoldName" th:field="*{houseHoldName}"/>
+			 </div>
+				
+			
+		    	<div class="col-sm-3  form-group  bw-required" vectorlink:classforerror="genderInterviwedPerson">
+					<label for="gender" class="control-label">Genero</label>
+					<div>
+						<th:block th:each="gender : ${genders}">
+							<div class="radio  radio-inline">
+								<input th:id="|id_${gender}|" type="radio" th:value="${genderInterviwedPerson}" th:field="*{genderInterviwedPerson}"> 
+								<label th:for="|id_${gender}|" th:text="${gender.description}"></label>
+							</div>
+						</th:block>
+					</div>
+		    	</div>
+		    	
+		    	<div class="form-group  col-sm-2  bw-required" vectorlink:classforerror="houseHoldId">
+					<label for="houseHoldId" class="control-label">Codigo PIDOM</label>
+					<input type="text" class="form-control" id="houseHoldId" th:field="*{houseHoldId}"/>
+			    </div>
+			 	
+			 	<div class="col-sm-3  form-group  bw-required" vectorlink:classforerror="genderInterviwedPerson">
+					<label for="gender" class="control-label">Situacao de Pulverizacao</label>
+					<div>
+						<th:block th:each="status : ${status}">
+							<div class="radio  radio-inline">
+								<input th:id="|id_${status}|" type="radio" th:value="${sprayStatus}" th:field="*{sprayStatus}"> 
+								<label th:for="|id_${status}|" th:text="${status.description}"></label>
+							</div>
+						</th:block>
+					</div>
+		    	</div>
+			 </div>
+			 
+		     <div class="row">
+		      <div class="col-xs-12 ui-fluid">
+                    <table class="table table-condensed-extra table-hover table-rensponsive">
+                        <colgroup>
+                          <col span="5">
+                          <col span="6">
+                          <col span="2">
+                        </colgroup>
+                         <thead>
+                      <tr class="top-headers">
+
+                        <th colspan="5">Pulverizadas</th>
+                        <th colspan="6">Não Pulverizadas</th>
+                        <th colspan="2">Compartimentos Elegiveis</th>
+                        <th colspan="1">&nbsp;</th>
+                      </tr>
+                      <tr class="secondary-headers">
+                        <th>Casas Pulverizadas</th>
+                        <th>Homens</th>
+                        <th>Mulheres</th>
+                        <th>Mulhrs Gravidas</th>
+                        <th>Criancas < 5 anos de idade</th>
+                        <th>Motivo</th>
+                        <th>Casas nao Pulverizadas</th>
+                        <th>Homens</th>
+                        <th>Mulheres</th>
+                        <th>Mulheres Gravidas</th>
+                        <th>Criancas < 5 anos de idade</th>
+                        <th>Encontrados</th>
+                        <th>Pulverizados</th>
+                        <th>Codigo de Estudo</th>
+
+                      </tr>
+                    </thead>
+                        <tbody>
+                          <tr>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td>
+                             <select id="reasonNotSprayed" class="form-control" th:field="*{reasonNotSprayed}" >
+			                   <option value="">----</option> 
+			                   <option th:each="motivo : ${reasonNotSprayeds}" th:value="${motivo}" th:text="${motivo.description}"></option>
+			                 </select> 
+                           </td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control" /></td>
+                          </tr>
+                        </tbody>
+                  </table>
+                </div>
+		    
+		    </div>	
+			
+			
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+		</form>
+	</div>
+</section>
+
+</html>

@@ -1,0 +1,54 @@
+package com.mz.vectorlink.vectorlink.repository.filter;
+
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class SprayTotalsFilter {
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate endDate;
+	
+	private String villageName;
+	
+	private String sopCode;
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getVillageName() {
+		return villageName;
+	}
+
+	public void setVillageName(String villageName) {
+		this.villageName = villageName;
+	}
+
+	public String getSopCode() {
+		return sopCode;
+	}
+
+	public void setSopCode(String sopCode) {
+		this.sopCode = sopCode;
+	}
+	
+	
+	
+
+}
