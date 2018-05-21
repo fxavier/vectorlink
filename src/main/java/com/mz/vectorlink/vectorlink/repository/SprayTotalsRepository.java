@@ -9,6 +9,6 @@ import com.mz.vectorlink.vectorlink.repository.helper.spray.totals.SprayTotalsRe
 
 public interface SprayTotalsRepository extends JpaRepository<SprayTotals, Long>, SprayTotalsRepositoryQueries{
 
-	public Optional<SprayTotals> findByReferenceIgnoreCase(String reference);
+	public Optional<SprayTotals> findByReference(String reference);
 	
 }

@@ -64,10 +64,7 @@ public class OperationalSiteController {
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<OperationalSite> pesquisarPorCodigoDistrito(
 			@RequestParam(name = "distrito", defaultValue = "-1") Long codigoDistrito){
-		try {
-			Thread.sleep(500);
-		} catch(InterruptedException e) {}
-		
+				
 		return operationalSiteRepository.findByDistrictId(codigoDistrito);
 	}
 

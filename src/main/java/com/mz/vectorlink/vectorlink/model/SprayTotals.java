@@ -26,7 +26,7 @@ public class SprayTotals implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "A data é obrigatória")
 	@Column(name = "spray_date")
 	private LocalDate sprayDate;
 	

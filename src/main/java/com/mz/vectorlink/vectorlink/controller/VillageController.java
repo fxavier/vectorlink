@@ -1,18 +1,25 @@
 package com.mz.vectorlink.vectorlink.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mz.vectorlink.vectorlink.model.Locality;
 import com.mz.vectorlink.vectorlink.model.Village;
 import com.mz.vectorlink.vectorlink.repository.DistrictRepository;
+import com.mz.vectorlink.vectorlink.repository.VillageRepository;
 import com.mz.vectorlink.vectorlink.service.VillageService;
 import com.mz.vectorlink.vectorlink.service.exception.CadastroVillageException;
 
@@ -22,6 +29,9 @@ public class VillageController {
 
 	@Autowired
 	private DistrictRepository districtRepository;
+	
+	@Autowired
+	private VillageRepository villageRepository;
 	
 	@Autowired
 	private VillageService villageService;
@@ -49,5 +59,15 @@ public class VillageController {
 		
 		attributes.addFlashAttribute("mensagem", "Bairro adicionado com sucesso");
 		return new ModelAndView("redirect:/bairros/novo");
+	}
+	
+	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Village> pesquisarPorCodigoLocalidade(
+			@RequestParam(name = "localidade", defaultValue = "-1") Long codigoLocalidade){
+		try {
+			Thread.sleep(500);
+		} catch(InterruptedException e) {}
+		
+		return villageRepository.findByLocalityId(codigoLocalidade);
 	}
 }

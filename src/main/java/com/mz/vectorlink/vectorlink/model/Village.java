@@ -37,7 +37,7 @@ public class Village implements Serializable{
 	@Transient
 	private OperationalSite operationalSite;
 	
-	private Long revisits;
+	private Long revisits = 0L;
 	
 	private Boolean active = false;
 

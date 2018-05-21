@@ -25,7 +25,8 @@ public class SprayTotalService {
 	
 	@Transactional
 	public void salvar(SprayTotals sprayTotals) {
-		Optional<SprayTotals> totalExistente = sprayTotalsRepository.findByReferenceIgnoreCase(sprayTotals.getReference());
+		Optional<SprayTotals> totalExistente = sprayTotalsRepository.findByReference(sprayTotals.getReference());
+	   //  System.out.println("Reference:"+totalExistente.get().getReference());
 		if(totalExistente.isPresent() && sprayTotals.isNovo()) {
 			throw new CadastroSprayTotalsException("Esse total ja foi cadastrado");
 		}

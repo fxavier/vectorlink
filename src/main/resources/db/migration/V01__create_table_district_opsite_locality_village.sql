@@ -18,6 +18,7 @@ name VARCHAR(100) NOT NULL,
 target BIGINT NOT NULL DEFAULT '0',
 district_id BIGINT NOT NULL,
 active BOOLEAN DEFAULT true,
+CONSTRAINT fk_district_opsite
 FOREIGN KEY(district_id) REFERENCES district(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -27,7 +28,8 @@ name VARCHAR(100) NOT NULL,
 operational_site_id BIGINT NOT NULL,
 active BOOLEAN DEFAULT true,
 PRIMARY KEY(id),
-FOREIGN KEY(operational_site_id) REFERENCES operational_site(id)
+CONSTRAINT fk_locality_opSite
+ FOREIGN KEY(operational_site_id) REFERENCES operational_site(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE village(
@@ -37,5 +39,6 @@ locality_id BIGINT,
 revisits BIGINT NOT NULL DEFAULT '0',
 active BOOLEAN DEFAULT true,
 PRIMARY KEY(id),
-FOREIGN KEY(locality_id) REFERENCES village(id)
+CONSTRAINT fk_locality_village
+  FOREIGN KEY(locality_id) REFERENCES locality(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

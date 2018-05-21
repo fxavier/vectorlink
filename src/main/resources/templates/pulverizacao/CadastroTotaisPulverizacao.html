@@ -3,6 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
 	xmlns:vectorlink="http://vectorlink.abt.com">
 
 <head>
@@ -36,74 +37,112 @@
 		 th:action="@{sprayTotals.novo} ? @{/totais_pulverizacao/novo} : @{/totais_pulverizacao/{id}(id=${sprayTotals.id})}">
 			<vectorlink:message/>
 			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{reference}" />
 			<div class="row">	
-			
-			   			
 				
-			   <div class="col-sm-4  form-group bw-required">
+				<div class="form-group  col-sm-4 bw-required" vectorlink:classforerror="sprayDate">
+					<label class="control-label" for="sprayDate">Data de pulverizacao</label>
+					<input type="text" class="form-control" id="data" th:field="*{sprayDate}" 
+					 data-provide="datepicker" data-date-orientation="bottom" data-date-language="pt-BR"
+					 data-date-today-highlight="true" data-date-autoclose="true" autocomplete="off"/>
+		    	</div>
+					   			
+				<div class="col-sm-4  form-group bw-required" vectorlink:classforerror="district">
 			      <label for="district" class="control-label" >Distrito</label>
-			       <select id="district" class="form-control" th:field="*{district}">
+			       <select id="district" class="form-control" th:field="*{district}" >
 			         <option value="">Selecione o distrito</option> 
-			         <option th:each="district : ${districts}" th:value="${district.id}" th:text="${district.name}"></option>
-			       </select> 
-			    </div> 
-			    
-			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="operationalSite">
-			      <label for="operationalSite" class="control-label" >Base Operacional</label>
-			       <select id="operationalSite" class="form-control" th:field="*{operationalSite}">
-			         <option value="">Selecione a base operacional</option> 
-			         <option th:each="operationalSite : ${operationalSites}" th:value="${operationalSite.id}" th:text="${operationalSite.name}"></option>
-			       </select> 
-			    </div> 
-			    
-			    <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="locality">
-			      <label for="locality" class="control-label" >Localidade</label>
-			       <select id="locality" class="form-control" th:field="*{locality}">
-			         <option value="">Selecione a localidade</option> 
-			         <option th:each="locality : ${localities}" th:value="${locality.id}" th:text="${locality.name}"></option>
-			       </select> 
-			    </div> 
-			    
-			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="village">
-			      <label for="village" class="control-label" >Bairro</label>
-			       <select id="village" class="form-control" th:field="*{village}">
-			         <option value="">Selecione a bairro</option> 
-			         <option th:each="villages : ${village}" th:value="${village.id}" th:text="${village.name}"></option>
-			       </select> 
-			    </div> 
-			    
-			    <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="sprayOperator">
-			      <label for="sprayOperator" class="control-label" >Roceador</label>
-			       <select id="sprayOperator" class="form-control" th:field="*{sprayOperator}">
-			         <option value="">Selecione o roceador</option> 
-			         <option th:each="sop : ${sops}" th:value="${sop.id}" th:text="${sop.name}"></option>
-			       </select> 
-			    </div> 
-			     <div class="col-sm-4  form-group bw-required"   vectorlink:classforerror="teamLeader">
-			      <label for="teamLeader" class="control-label" >Chefe de equipa</label>
-			       <select id="teamLeader" class="form-control" th:field="*{teamLeader}">
-			         <option value="">Selecione o Chefe de equipa</option> 
-			         <option th:each="teamLeader : ${teamLeaders}" th:value="${teamLeader.id}" th:text="${teamLeader.name}"></option>
+			         <option th:each="distrito : ${districts}" th:value="${distrito.id}" th:text="${distrito.name}"></option>
 			       </select> 
 			    </div> 
 				
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="operationalSite">
+			      <label for="localidade" class="control-label" >Base Operacional</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
+			       <select id="operationalSite" class="form-control" data:url="@{/opsites}" th:field="*{operationalSite}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    </div>
+			    
+			    <div class="row">
+			    <div class="col-sm-6  form-group bw-required" vectorlink:classforerror="locality">
+			      <label for="localidade" class="control-label" >Localidade</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenLocalidadeSelecionada" th:value="*{locality} != null ? *{locality.id}"/>
+			       <select id="localidade" class="form-control" data:url="@{/localidades}" th:field="*{locality}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    
+			    <div class="col-sm-6  form-group bw-required" vectorlink:classforerror="village">
+			      <label for="bairro" class="control-label" >Bairro</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenBairroSelecionado" th:value="*{village} != null ? *{village.id}"/>
+			       <select id="bairro" class="form-control" data:url="@{/bairros}" th:field="*{village}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    </div>
+			    
+			    <div class="row">
+			     <div class="col-sm-6  form-group bw-required" vectorlink:classforerror="sprayOperator">
+			      <label for="sop" class="control-label" >Roceador</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenRoceadorSelecionado" th:value="*{sprayOperator} != null ? *{sprayOperator.id}"/>
+			       <select id="sop" class="form-control" data:url="@{/roceadores}" th:field="*{sprayOperator}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    
+			    <div class="col-sm-6  form-group bw-required" vectorlink:classforerror="teamLeader">
+			      <label for="teamLeader" class="control-label" >Chefe de equipa</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddeTeamLeaderSelecionado" th:value="*{teamLeader} != null ? *{teamLeader.id}"/>
+			       <select id="teamLeader" class="form-control" data:url="@{/chefe_equipas}" th:field="*{teamLeader}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+				</div>
 			
-			</div>	
+				
+			
+			
 			 <div class="row">								
 				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideIssued">
 					<label for="insecticideIssued" class="control-label">Garrafas de insecticida recebidas</label>
-					<input type="text" class="form-control" id="insecticideIssued" th:field="*{insecticideIssued}"/>
+					<input type="text" class="form-control js-plain" id="insecticideIssued" th:field="*{insecticideIssued}"/>
 				</div>
 				
 				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideFullReturned">
 					<label for="insecticideFullReturned" class="control-label">Garrafas cheias devolvidas</label>
-					<input type="text" class="form-control" id="insecticideFullReturned" th:field="*{insecticideFullReturned}"/>
+					<input type="text" class="form-control js-plain" id="insecticideFullReturned" th:field="*{insecticideFullReturned}"/>
 				
 				</div>
 				
 				<div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="insecticideEmptyReturned">
 					<label for="insecticideEmptyReturned" class="control-label">Garrafas vazias devolvidas</label>
-					<input type="text" class="form-control" id="insecticideEmptyReturned" th:field="*{insecticideEmptyReturned}"/>
+					<input type="text" class="form-control js-plain" id="insecticideEmptyReturned" th:field="*{insecticideEmptyReturned}"/>
 				</div>
 		    </div>	
 		    <div class="row">
@@ -138,18 +177,18 @@
                         </thead>
                         <tbody>
                           <tr>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" class="form-control js-plain" id="sprayedStructures" th:field="*{sprayedStructures}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="sprayedMan" th:field="*{sprayedMan}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="sprayedWomen" th:field="*{sprayedWomen}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="sprayedPregnantWomen" th:field="*{sprayedPregnantWomen}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="sprayedChildren" th:field="*{sprayedChildren}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="notSprayedStructures" th:field="*{notSprayedStructures}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="notSprayedMen" th:field="*{notSprayedMen}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="notSprayedWomen" th:field="*{notSprayedWomen}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="notSprayedPregnantWomen" th:field="*{notSprayedPregnantWomen}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="notSprayedChildren" th:field="*{notSprayedChildren}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="roomsFound" th:field="*{roomsFound}"/></td>
+                           <td><input type="text" class="form-control js-plain" id="roomsSprayed" th:field="*{roomsSprayed}"/></td>
                           </tr>
                         </tbody>
                   </table>
@@ -162,5 +201,9 @@
 		</form>
 	</div>
 </section>
-
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vectorlink.combo-distrito-localidade-bairro.js}"></script>
+	<script th:src="@{/javascripts/vectorlink.combos-roceador-distrito.js}"></script> 
+	<script th:src="@{/javascripts/vectorLink.combo-distrito-teamLeader.js}"></script> 
+</th:block>
 </html>
