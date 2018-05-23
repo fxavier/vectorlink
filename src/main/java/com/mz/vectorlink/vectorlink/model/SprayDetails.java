@@ -32,15 +32,17 @@ public class SprayDetails implements Serializable{
 	@Column(name = "spray_date")
 	private LocalDate sprayDate;
 	
+	
 	@NotNull
 	@Column(name = "household_name")
 	private String houseHoldName;
 	
-	@NotNull
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "gender_person_interviwed")
 	private Gender genderInterviwedPerson;
 	
+
 	@NotNull
 	@Column(name = "household_id")
 	private String houseHoldId;
@@ -98,10 +100,42 @@ public class SprayDetails implements Serializable{
 	
 	
 	private String reference;
+	
+	@Transient
+	private District district;
+	
+	@Transient
+	private OperationalSite operationalSite;
+	
+	@Transient
+	private Locality locality;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "village_id")
+	private Village village;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "sop_id")
+	private SprayOperator sprayOperator;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "tl_id")
+	private TeamLeader teamLeader;
+	
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
+
 
 	@ManyToOne
 	@JoinColumn(name = "spray_totals_id")
 	private SprayTotals sprayTotals;
+	
+	@Column(name = "study_code")
+	private String studyCode;
 
 	public Long getId() {
 		return id;
@@ -258,7 +292,71 @@ public class SprayDetails implements Serializable{
 	public void setSprayTotals(SprayTotals sprayTotals) {
 		this.sprayTotals = sprayTotals;
 	}
-	
+		
+	public District getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(District district) {
+		this.district = district;
+	}
+
+	public OperationalSite getOperationalSite() {
+		return operationalSite;
+	}
+
+	public void setOperationalSite(OperationalSite operationalSite) {
+		this.operationalSite = operationalSite;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
+	}
+
+	public Village getVillage() {
+		return village;
+	}
+
+	public void setVillage(Village village) {
+		this.village = village;
+	}
+
+	public SprayOperator getSprayOperator() {
+		return sprayOperator;
+	}
+
+	public void setSprayOperator(SprayOperator sprayOperator) {
+		this.sprayOperator = sprayOperator;
+	}
+
+	public TeamLeader getTeamLeader() {
+		return teamLeader;
+	}
+
+	public void setTeamLeader(TeamLeader teamLeader) {
+		this.teamLeader = teamLeader;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+		
+	public String getStudyCode() {
+		return studyCode;
+	}
+
+	public void setStudyCode(String studyCode) {
+		this.studyCode = studyCode;
+	}
+
 	@Transient
     public Boolean isNovo() {
 		return this.id == null;

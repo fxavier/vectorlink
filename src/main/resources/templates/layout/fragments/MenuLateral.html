@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:clinica="http://brewer.algaworks.com">
+	xmlns:vectorlink="http://vectorlink.abt.com">
 	
 <body>
 <aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
@@ -10,7 +10,7 @@
     	<nav class="aw-menu  js-menu">
       		<ul class="aw-menu__list">
 
-        		<li class="aw-menu__item" clinica:menu="@{/}">
+        		<li class="aw-menu__item" xmlns:vectorlink:menu="@{/}">
           			<a th:href="@{/}"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
         		</li>
         		
@@ -21,38 +21,32 @@
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-          			   <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/clinicas.+}">
-			            	<a th:href="@{/countries/novo}">Paises</a>
+          			   			            
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/distritos.*}">
+			            	<a th:href="@{/distritos/novo}">Distritos</a>
 			            </li>
-			            <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/clinicas.+}">
-			            	<a th:href="@{/clinicas/nova}">Provincias</a>
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/opsites.*}">
+			            	<a th:href="@{/opsites/novo}">Bases Operacionais</a>
 			            </li>
-			            
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Distritos</a>
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/localidades.*}">
+			            	<a th:href="@{/localidades/novo}">Localidades</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Bases Operacionais</a>
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/bairros.*}">
+			            	<a th:href="@{/bairros/novo}">Bairros</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Localidades</a>
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/totais_mobilizacao.*}">
+			            	<a th:href="@{/totais_mobilizacao/novo}">Mobilizadores</a>
+			            	<li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/assistenteIEC.*}">
+			            	<a th:href="@{/assistenteIEC/novo}">Assistentes de IEC</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Bairros</a>
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/roceadores.*}">
+			            	<a th:href="@{/roceadores/novo}">Roceadores</a>
 			            </li>
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Mobilizadores</a>
-			            	<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Assistentes de IEC</a>
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/teamLeaders.*}">
+			            	<a th:href="@{/teamLeaders/novo}">Chefes de equipa</a>
 			            </li>
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Roceadores</a>
-			            </li>
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Chefes de equipa</a>
-			            </li>
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Usuarios</a>
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/usuarios.*}">
+			            	<a th:href="@{/usuarios/novo}">Usuarios</a>
 			            </li>
 			            
 			        </ul>
@@ -65,11 +59,11 @@
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/totais_pulverizacao/novo}">
 			            	<a th:href="@{/entidades}">Totais</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
-			            	<a th:href="@{/entidades}">Detalhes</a>
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/detalhes_pulverizacao}">
+			            	<a th:href="@{/entidade}">Detalhes</a>
 			            </li>
 			            
           			</ul>
@@ -81,11 +75,11 @@
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
-			            	<a th:href="@{/entidades}">Totais</a>
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/totais_pulverizacao.*}">
+			            	<a th:href="@{/totais_pulverizacao/novo}">Totais</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
-			            	<a th:href="@{/entidades}">Detalhes</a>
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/detalhes_pulverizacao.*}">
+			            	<a th:href="@{/detalhes_pulverizacao/novo}">Detalhes</a>
 			            </li>
 			            
           			</ul>
@@ -98,10 +92,10 @@
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/entidades.*}">
 			            	<a th:href="@{/entidades}">Totais</a>
 			            </li>
-			             <li class="aw-menu__item  aw-menu__item--link" clinica:menu="@{/entidades.*}">
+			             <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/entidades.*}">
 			            	<a th:href="@{/entidades}">Detalhes</a>
 			            </li>
 			            
@@ -117,7 +111,7 @@
           			</a>
 
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/relatorios.*}">
+			            <li class="aw-menu__item  aw-menu__item--link" vectorlink:menu="@{/relatorios.*}">
 			            	<a th:href="@{/relatorios/vendasEmitidas}">Relatorios</a> 
 			            </li>
           			</ul>

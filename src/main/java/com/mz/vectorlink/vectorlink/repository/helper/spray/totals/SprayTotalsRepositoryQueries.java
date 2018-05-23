@@ -9,5 +9,8 @@ import com.mz.vectorlink.vectorlink.repository.filter.SprayTotalsFilter;
 public interface SprayTotalsRepositoryQueries {
 	
 	public Page<SprayTotals> filter(SprayTotalsFilter sprayTotalsFilter, Pageable pageable);
+	public SprayTotals findBySprayDetailsReference(String reference);
+
+	
 
 }

@@ -42,17 +42,17 @@ Vectorlink.MaskPhoneNumber = (function() {
 	
 }());
 
-Vectorlink.MaskCep = (function() {
+Vectorlink.MaskPidom = (function() {
 	
-	function MaskCep() {
-		this.inputCep = $('.js-cep');
+	function MaskPidom() {
+		this.inputPidom = $('.js-pidom');
 	}
 	
-	MaskCep.prototype.enable = function() {
-		this.inputCep.mask('00.000-000');
+	MaskPidom.prototype.enable = function() {
+		this.inputPidom.mask('0-000000');
 	}
 	
-	return MaskCep;
+	return MaskPidom;
 	
 }());
 
@@ -92,6 +92,21 @@ Vectorlink.Security = (function() {
 	
 }());
 
+
+Vectorlink.MaskStudyCode = (function() {
+	
+	function MaskStudyCode() {
+		this.inputStudyCode = $('.js-studyCode');
+	}
+	
+	MaskStudyCode.prototype.enable = function() {
+		this.inputStudyCode.mask('0000 000');
+	}
+	
+	return MaskStudyCode;
+	
+}());
+
 numeral.language('pt-br');
 
 Vectorlink.formatarMoeda = function(valor) {
@@ -109,11 +124,14 @@ $(function() {
 	var maskPhoneNumber = new Vectorlink.MaskPhoneNumber();
 	maskPhoneNumber.enable();
 	
-	var maskCep = new Vectorlink.MaskCep();
-	maskCep.enable();
+	var maskPidom = new Vectorlink.MaskPidom();
+	maskPidom.enable();
 	
 	var maskDate = new Vectorlink.MaskDate();
 	maskDate.enable();
+	
+	var maskStudyCode = new Vectorlink.MaskStudyCode();
+	maskStudyCode.enable();
 	
 	var security = new Vectorlink.Security();
 	security.enable();

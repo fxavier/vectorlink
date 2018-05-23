@@ -6,14 +6,27 @@ public enum SprayStatus {
 	NOT_SPRAYED("Nao Pulverizada");
 	
 	private String description;
+	private String documento;
 	
-	SprayStatus(String description){
+	private SprayStatus(String description, String documento) {
+		this.description = description;
+		this.documento = documento;
+	}
+		
+	private SprayStatus(String description) {
 		this.description = description;
 	}
+
+
 
 	public String getDescription() {
 		return description;
 	}
 
+	public String getDocumento() {
+		return documento;
+	}
+	   
+	
 	
 }

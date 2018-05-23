@@ -92,4 +92,18 @@ public class SprayTotalsRepositoryImpl implements SprayTotalsRepositoryQueries{
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
 	}
+
+
+
+
+	@Override
+	public SprayTotals findBySprayDetailsReference(String reference) {
+		
+		return manager.createQuery("from SprayTotals where reference =:referencia", SprayTotals.class)
+				.setParameter("referencia", reference)
+				.getSingleResult();
+	}
+
+
+	
 }

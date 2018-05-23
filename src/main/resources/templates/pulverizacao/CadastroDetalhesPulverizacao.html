@@ -3,6 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
 	xmlns:vectorlink="http://vectorlink.abt.com">
 
 <head>
@@ -36,6 +37,95 @@
 		 th:action="@{sprayDetails.novo} ? @{/detalhes_pulverizacao/novo} : @{/detalhes_pulverizacao/{id}(id=${sprayDetails.id})}">
 			<vectorlink:message/>
 			<input type="hidden" th:field="*{id}" />	
+			<input type="hidden" th:field="*{reference}" />
+			<div class="row">	
+				
+				<div class="form-group  col-sm-3 bw-required" vectorlink:classforerror="sprayDate">
+					<label class="control-label" for="sprayDate">Data de pulverizacao</label>
+					<input type="text" class="form-control" id="data" th:field="*{sprayDate}" 
+					 data-provide="datepicker" data-date-orientation="bottom" data-date-language="pt-BR"
+					 data-date-today-highlight="true" data-date-autoclose="true" autocomplete="off"/>
+		    	</div>
+					   			
+				<div class="col-sm-3  form-group bw-required" vectorlink:classforerror="district">
+			      <label for="district" class="control-label" >Distrito</label>
+			       <select id="district" class="form-control" th:field="*{district}" >
+			         <option value="">Selecione o distrito</option> 
+			         <option th:each="distrito : ${districts}" th:value="${distrito.id}" th:text="${distrito.name}"></option>
+			       </select> 
+			    </div> 
+				
+			    <div class="col-sm-3  form-group bw-required" vectorlink:classforerror="operationalSite">
+			      <label for="localidade" class="control-label" >Base Operacional</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
+			       <select id="operationalSite" class="form-control" data:url="@{/opsites}" th:field="*{operationalSite}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			  
+			
+			    <div class="col-sm-3  form-group bw-required" vectorlink:classforerror="locality">
+			      <label for="localidade" class="control-label" >Localidade</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenLocalidadeSelecionada" th:value="*{locality} != null ? *{locality.id}"/>
+			       <select id="localidade" class="form-control" data:url="@{/localidades}" th:field="*{locality}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			   </div> 
+			    
+			   <div class="row">
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="village">
+			      <label for="bairro" class="control-label" >Bairro</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenBairroSelecionado" th:value="*{village} != null ? *{village.id}"/>
+			       <select id="bairro" class="form-control" data:url="@{/bairros}" th:field="*{village}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div>
+			 
+			 
+			
+			     <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="sprayOperator">
+			      <label for="sop" class="control-label" >Roceador</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenRoceadorSelecionado" th:value="*{sprayOperator} != null ? *{sprayOperator.id}"/>
+			       <select id="sop" class="form-control" data:url="@{/roceadores}" th:field="*{sprayOperator}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="teamLeader">
+			      <label for="teamLeader" class="control-label" >Chefe de equipa</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddeTeamLeaderSelecionado" th:value="*{teamLeader} != null ? *{teamLeader.id}"/>
+			       <select id="teamLeader" class="form-control" data:url="@{/chefe_equipas}" th:field="*{teamLeader}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			</div>
+			
 			<div class="row">
 			 <div class="form-group  col-sm-4  bw-required" vectorlink:classforerror="houseHoldName">
 					<label for="houseHoldName" class="control-label">Chefe do agregado familiar</label>
@@ -45,36 +135,46 @@
 			
 		    	<div class="col-sm-3  form-group  bw-required" vectorlink:classforerror="genderInterviwedPerson">
 					<label for="gender" class="control-label">Genero</label>
-					<div>
+					 <select id="genderInterviwedPerson" class="form-control" th:field="*{genderInterviwedPerson}" >
+			         <option value="">Selecione o genero</option> 
+			         <option th:each="gender : ${genders}" th:value="${gender}" th:text="${gender.description}"></option>
+			       </select> 
+					<!-- <div>
 						<th:block th:each="gender : ${genders}">
 							<div class="radio  radio-inline">
 								<input th:id="|id_${gender}|" type="radio" th:value="${genderInterviwedPerson}" th:field="*{genderInterviwedPerson}"> 
 								<label th:for="|id_${gender}|" th:text="${gender.description}"></label>
 							</div>
 						</th:block>
-					</div>
+					</div> -->
 		    	</div>
 		    	
 		    	<div class="form-group  col-sm-2  bw-required" vectorlink:classforerror="houseHoldId">
 					<label for="houseHoldId" class="control-label">Codigo PIDOM</label>
-					<input type="text" class="form-control" id="houseHoldId" th:field="*{houseHoldId}"/>
+					<input type="text" class="form-control js-pidom" id="houseHoldId" th:field="*{houseHoldId}"/>
 			    </div>
 			 	
-			 	<div class="col-sm-3  form-group  bw-required" vectorlink:classforerror="genderInterviwedPerson">
-					<label for="gender" class="control-label">Situacao de Pulverizacao</label>
-					<div>
+			 	<div class="col-sm-3  form-group  bw-required" vectorlink:classforerror="sprayStatus">
+					<label for="sprayStatus" class="control-label">Situacao de Pulverizacao</label>
+					<select id="sprayStatus" class="form-control" th:field="*{sprayStatus}" >
+			         <option value="">Selecione o status</option> 
+			         <option th:each="status : ${status}" th:value="${status}" th:text="${status.description}" 
+			           data:documento="${status.documento}">
+			         </option>
+			       </select> 
+					<!-- <div>
 						<th:block th:each="status : ${status}">
 							<div class="radio  radio-inline">
 								<input th:id="|id_${status}|" type="radio" th:value="${sprayStatus}" th:field="*{sprayStatus}"> 
 								<label th:for="|id_${status}|" th:text="${status.description}"></label>
 							</div>
 						</th:block>
-					</div>
+					</div> -->
 		    	</div>
 			 </div>
 			 
 		     <div class="row">
-		      <div class="col-xs-12 ui-fluid">
+		      <div class="col-sm-12">
                     <table class="table table-condensed-extra table-hover table-rensponsive">
                         <colgroup>
                           <col span="5">
@@ -84,50 +184,48 @@
                          <thead>
                       <tr class="top-headers">
 
-                        <th colspan="5">Pulverizadas</th>
-                        <th colspan="6">Não Pulverizadas</th>
+                        <th colspan="4">Pulverizadas</th>
+                        <th colspan="5">Não Pulverizadas</th>
                         <th colspan="2">Compartimentos Elegiveis</th>
                         <th colspan="1">&nbsp;</th>
                       </tr>
                       <tr class="secondary-headers">
-                        <th>Casas Pulverizadas</th>
                         <th>Homens</th>
                         <th>Mulheres</th>
                         <th>Mulhrs Gravidas</th>
                         <th>Criancas < 5 anos de idade</th>
                         <th>Motivo</th>
-                        <th>Casas nao Pulverizadas</th>
                         <th>Homens</th>
                         <th>Mulheres</th>
                         <th>Mulheres Gravidas</th>
                         <th>Criancas < 5 anos de idade</th>
-                        <th>Encontrados</th>
-                        <th>Pulverizados</th>
+                        <th>Encntrados</th>
+                        <th>Pulvrizados</th>
                         <th>Codigo de Estudo</th>
 
                       </tr>
                     </thead>
                         <tbody>
                           <tr>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" id="sprayedMan" class="form-control js-plain" th:field="*{sprayedMan}" disabled/></td>
+                           <td><input type="text" id="sprayedWomen" class="form-control js-plain" th:field="*{sprayedWomen}" disabled/></td>
+                           <td><input type="text" id="sprayedPregnantWomen"  class="form-control js-plain" th:field="*{sprayedPregnantWomen}" disabled/></td>
+                           <td><input type="text" id="sprayedChildren" class="form-control js-plain" th:field="*{sprayedChildren}" disabled/></td>
+                           
                            <td>
-                             <select id="reasonNotSprayed" class="form-control" th:field="*{reasonNotSprayed}" >
+                             <select id="reasonNotSprayed" class="form-control" th:field="*{reasonNotSprayed}" disabled>
 			                   <option value="">----</option> 
-			                   <option th:each="motivo : ${reasonNotSprayeds}" th:value="${motivo}" th:text="${motivo.description}"></option>
+			                   <option th:each="motivo : ${reasonNotSprayeds}" th:value="${motivo}" th:text="${motivo.description}" ></option>
 			                 </select> 
                            </td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
-                           <td><input type="text" class="form-control" /></td>
+                           <td><input type="text" id="notSprayedMen" class="form-control js-plain" th:field="*{notSprayedMen}" disabled/></td>
+                           <td><input type="text" id="notSprayedWomen" class="form-control js-plain" th:field="*{notSprayedWomen}" disabled/></td>
+                           <td><input type="text" id="notSprayedPregnantWomen" class="form-control js-plain" th:field="*{notSprayedPregnantWomen}" disabled/></td>
+                           <td><input type="text" id="notSprayedChildren" class="form-control js-plain" th:field="*{notSprayedChildren}" disabled/></td>
+                           <td><input type="text" id="roomsFound" class="form-control js-plain" th:field="*{roomsFound}"/></td>
+                           <td><input type="text" id="roomsSprayed" class="form-control js-plain" th:field="*{roomsSprayed}"/></td>
+                           <td><input type="text" id="studyCode" class="form-control js-studyCode" th:field="*{studyCode}" disabled/></td>
+                           
                           </tr>
                         </tbody>
                   </table>
@@ -140,5 +238,11 @@
 		</form>
 	</div>
 </section>
-
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vectorlink.combo-distrito-localidade-bairro.js}"></script>
+	<script th:src="@{/javascripts/vectorlink.combos-roceador-distrito.js}"></script> 
+	<script th:src="@{/javascripts/vectorLink.combo-distrito-teamLeader.js}"></script>  
+	<script th:src="@{/javascripts/sprayDetails.spray-status.js}"></script>
+	<script th:src="@{/javascripts/sprayDetails.codigo_estudo.js}"></script>
+</th:block>
 </html>
