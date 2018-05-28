@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:vectorlink="http://vectorlink.abt.com">
+
+<head>
+	<title>Pesquisa de totais de Pulverizacao</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vectorlinkTotais-table.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+
+<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de Totais de Pulverizacao</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-success" th:href="@{/totais_pulverizacao/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo Total</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+	<form method="GET" th:object="${sprayTotalsFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-4" >
+					<label class="control-label" for="startDate">Data Inicial</label>
+					<input type="text" class="form-control" id="startDate" th:field="*{startDate}"
+					 data-provide="datepicker" data-date-orientation="bottom" data-date-language="pt-BR"
+					 data-date-today-highlight="true" data-date-autoclose="true" autocomplete="off"/>
+		    	</div>
+		    	<div class="form-group  col-sm-4">
+					<label class="control-label" for="endDate">Data Final</label>
+					<input type="text" class="form-control" id="endDate" th:field="*{endDate}"
+					 data-provide="datepicker" data-date-orientation="bottom" data-date-language="pt-BR"
+					 data-date-today-highlight="true" data-date-autoclose="true" autocomplete="off"/>
+		    	</div>
+				
+			 	<div class="col-sm-4  form-group">
+			      <label for="district" class="control-label" >Distrito</label>
+			       <select id="district" class="form-control"  th:field="*{district}"> 
+			         <option value="">Todos os distritos</option> 
+			         <option th:each="distrito : ${districts}" th:value="${distrito.id}" th:text="${distrito.name}"></option>
+			       </select> 
+			    </div>
+			    
+			    
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="operationalSite">
+			      <label for="operationalSite" class="control-label" >Base Operacional</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
+			       <select id="operationalSite" class="form-control" data:url="@{/opsites}" th:field="*{operationalSite}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    
+			    
+			 
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="locality">
+			      <label for="localidade" class="control-label" >Localidade</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenLocalidadeSelecionada" th:value="*{locality} != null ? *{locality.id}"/>
+			       <select id="localidade" class="form-control" data:url="@{/localidades}" th:field="*{locality}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="village">
+			      <label for="bairro" class="control-label" >Bairro</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenBairroSelecionado" th:value="*{village} != null ? *{village.id}"/>
+			       <select id="bairro" class="form-control" data:url="@{/bairros}" th:field="*{village}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    </div>
+		
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+	</form>
+ </div>
+	<div class="row">
+		     <div class="col-xs-12 ui-fluid">
+                    <table class="table table-condensed-extra table-hover table-rensponsive">
+                        <colgroup>
+                          <col span="2">
+                          <col span="5">
+                          <col span="5">
+                          <col span="2">
+                          <col span="1">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th colspan="2"></th>
+                            <th colspan="5">Pulverizadas</th>
+                            <th colspan="5">Não Pulverizadas</th>
+                            <th colspan="2">Compartimentos Elegiveis</th>
+                            <th colspan="1">Accoes</th>
+                          </tr>
+                          <tr class="secondary-headers">
+                            <th>
+	                		<vectorlink:order page="${pagina}" field="sprayDate" text="Data"/>
+	                 	   </th>
+                            <th>Distrito</th>
+                            <th>Casas Pulverizadas</th>
+                            <th>Homens</th>
+                            <th>Mulheres</th>
+                            <th>Mulhrs Gravidas</th>
+                            <th>Criancas < 5 anos de idade</th>
+                            <th>Casas nao Pulverizadas</th>
+                            <th>Homens</th>
+                            <th>Mulheres</th>
+                            <th>Mulheres Gravidas</th>
+                            <th>Criancas < 5 anos de idade</th>
+                            <th>Enctrados</th>
+                            <th>Plverizads</th>
+                            <th></th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="sprayTotals : ${pagina.conteudo}">
+								<td th:text="${{sprayTotals.sprayDate}}"></td>
+								<td th:text="${sprayTotals.village.locality.operationalSite.district.name}"></td>
+								<td th:text="${sprayTotals.sprayedStructures}"></td>
+								<td th:text="${sprayTotals.sprayedMan}"></td>
+								<td th:text="${sprayTotals.sprayedWomen}"></td>
+								<td th:text="${sprayTotals.sprayedPregnantWomen}"></td>
+								<td th:text="${sprayTotals.sprayedChildren}"></td>
+								<td th:text="${sprayTotals.notSprayedStructures}"></td>
+								<td th:text="${sprayTotals.notSprayedMen}"></td>
+								<td th:text="${sprayTotals.notSprayedWomen}"></td>
+								<td th:text="${sprayTotals.notSprayedPregnantWomen}"></td>
+								<td th:text="${sprayTotals.notSprayedChildren}"></td>
+								<td th:text="${sprayTotals.roomsFound}"></td>
+								<td th:text="${sprayTotals.roomsSprayed}"></td>
+								
+								
+								<td>
+									<a class="btn  btn-link  btn-xs js-tooltip" title="Editar" 
+									    th:href="@{/totais_pulverizacao/{id}(id=${sprayTotals.id})}"> 
+										<i class="glyphicon glyphicon-pencil"></i>
+									</a>
+									<!-- <a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#" 
+									   data:url="@{/produtos/{codigo}(codigo=${produto.codigo})}"
+									   data:objeto="${produto.nome}">
+										<i class="glyphicon glyphicon-remove"></i>
+									</a> -->
+						</td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+					   <td colspan="15">Nenhum produto encontrado</td>
+					</tr>
+                        </tbody>
+                  </table>
+      </div>
+        <vectorlink:pagination page="${pagina}"/>
+     </div> 
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vectorlink.combo-distrito-localidade-bairro.js}"></script>
+	
+</th:block>
+
+</html>

@@ -14,11 +14,5 @@ public abstract class OperationalSite_ {
 	public static volatile SingularAttribute<OperationalSite, Long> id;
 	public static volatile SingularAttribute<OperationalSite, Long> target;
 
-	public static final String DISTRICT = "district";
-	public static final String NAME = "name";
-	public static final String ACTIVE = "active";
-	public static final String ID = "id";
-	public static final String TARGET = "target";
-
 }
 

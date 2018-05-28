@@ -10,7 +10,5 @@ public abstract class UsuarioGrupo_ {
 
 	public static volatile SingularAttribute<UsuarioGrupo, UsuarioGrupoId> id;
 
-	public static final String ID = "id";
-
 }
 

@@ -13,9 +13,5 @@ public abstract class Grupo_ {
 	public static volatile SingularAttribute<Grupo, Long> codigo;
 	public static volatile SingularAttribute<Grupo, String> nome;
 
-	public static final String PERMISSOES = "permissoes";
-	public static final String CODIGO = "codigo";
-	public static final String NOME = "nome";
-
 }
 

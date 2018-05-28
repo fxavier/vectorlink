@@ -26,22 +26,5 @@ public abstract class MobilizationDetails_ {
 	public static volatile SingularAttribute<MobilizationDetails, String> PhysicalVerified;
 	public static volatile SingularAttribute<MobilizationDetails, IecAssistant> iecAssistant;
 
-	public static final String MEN_SENTITIZED = "menSentitized";
-	public static final String WOMEN_SENTITIZED = "womenSentitized";
-	public static final String MOBILIZATION_STATUS = "mobilizationStatus";
-	public static final String HOUSEHOLDER_ID = "householderId";
-	public static final String SPRAY_ACCEPTANCE = "sprayAcceptance";
-	public static final String VERIFICATION_DATE = "verificationDate";
-	public static final String REFERENCE = "reference";
-	public static final String REASON_NOT_SENSITIZED = "reasonNotSensitized";
-	public static final String ARTHMETIC_VERIFIED = "ArthmeticVerified";
-	public static final String MOB_DATE = "mobDate";
-	public static final String REASON_NOT_ACCEPTED = "reasonNotAccepted";
-	public static final String ID = "id";
-	public static final String HOUSEHOLDER_NAME = "householderName";
-	public static final String MOBILIZATION_TOTALS = "mobilizationTotals";
-	public static final String PHYSICAL_VERIFIED = "PhysicalVerified";
-	public static final String IEC_ASSISTANT = "iecAssistant";
-
 }
 

@@ -14,11 +14,5 @@ public abstract class Village_ {
 	public static volatile SingularAttribute<Village, Long> id;
 	public static volatile SingularAttribute<Village, Long> revisits;
 
-	public static final String NAME = "name";
-	public static final String LOCALITY = "locality";
-	public static final String ACTIVE = "active";
-	public static final String ID = "id";
-	public static final String REVISITS = "revisits";
-
 }
 

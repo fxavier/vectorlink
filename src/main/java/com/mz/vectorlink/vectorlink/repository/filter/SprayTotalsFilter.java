@@ -2,17 +2,24 @@ package com.mz.vectorlink.vectorlink.repository.filter;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mz.vectorlink.vectorlink.model.District;
+import com.mz.vectorlink.vectorlink.model.Locality;
+import com.mz.vectorlink.vectorlink.model.OperationalSite;
+import com.mz.vectorlink.vectorlink.model.Village;
 
 public class SprayTotalsFilter {
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate endDate;
 	
-	private String villageName;
+	private District district;
+	
+	private OperationalSite operationalSite;
+
+	private Locality locality;
+	
+	private Village village;
 	
 	private String sopCode;
 
@@ -32,12 +39,37 @@ public class SprayTotalsFilter {
 		this.endDate = endDate;
 	}
 
-	public String getVillageName() {
-		return villageName;
+	public District getDistrict() {
+		return district;
 	}
 
-	public void setVillageName(String villageName) {
-		this.villageName = villageName;
+	public void setDistrict(District district) {
+		this.district = district;
+	}
+
+	
+	public OperationalSite getOperationalSite() {
+		return operationalSite;
+	}
+
+	public void setOperationalSite(OperationalSite operationalSite) {
+		this.operationalSite = operationalSite;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
+	}
+
+	public Village getVillage() {
+		return village;
+	}
+
+	public void setVillage(Village village) {
+		this.village = village;
 	}
 
 	public String getSopCode() {
@@ -47,8 +79,8 @@ public class SprayTotalsFilter {
 	public void setSopCode(String sopCode) {
 		this.sopCode = sopCode;
 	}
-	
-	
+
+		
 	
 
 }

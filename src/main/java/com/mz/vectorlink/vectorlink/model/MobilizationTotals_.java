@@ -25,21 +25,5 @@ public abstract class MobilizationTotals_ {
 	public static volatile SingularAttribute<MobilizationTotals, Long> sprayAcceptanceNo;
 	public static volatile SingularAttribute<MobilizationTotals, Long> foundStructures;
 
-	public static final String WOMEN_SENTITIZED_NO = "womenSentitizedNo";
-	public static final String SENTITIZED_STRUCTRS_YES = "sentitizedStructrsYes";
-	public static final String REFERENCE = "reference";
-	public static final String SENTITIZED_STRUCTURES_NO = "sentitizedStructuresNo";
-	public static final String MEN_SENTITIZED_YES = "menSentitizedYes";
-	public static final String MEN_SENTITIZED_NO = "menSentitizedNo";
-	public static final String WOMEN_SENTITIZED_YES = "womenSentitizedYes";
-	public static final String SPRAY_ACCEPTANCE_YES = "sprayAcceptanceYes";
-	public static final String MOB_DATE = "mobDate";
-	public static final String MOBILIZER = "mobilizer";
-	public static final String USUARIO = "usuario";
-	public static final String ID = "id";
-	public static final String VILLAGE = "village";
-	public static final String SPRAY_ACCEPTANCE_NO = "sprayAcceptanceNo";
-	public static final String FOUND_STRUCTURES = "foundStructures";
-
 }
 

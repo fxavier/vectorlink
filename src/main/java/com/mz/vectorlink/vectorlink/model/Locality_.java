@@ -13,10 +13,5 @@ public abstract class Locality_ {
 	public static volatile SingularAttribute<Locality, Boolean> active;
 	public static volatile SingularAttribute<Locality, Long> id;
 
-	public static final String OPERATIONAL_SITE = "operationalSite";
-	public static final String NAME = "name";
-	public static final String ACTIVE = "active";
-	public static final String ID = "id";
-
 }
 

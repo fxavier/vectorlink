@@ -16,12 +16,5 @@ public abstract class Usuario_ {
 	public static volatile ListAttribute<Usuario, Grupo> grupos;
 	public static volatile SingularAttribute<Usuario, String> email;
 
-	public static final String SENHA = "senha";
-	public static final String CODIGO = "codigo";
-	public static final String ATIVO = "ativo";
-	public static final String NOME = "nome";
-	public static final String GRUPOS = "grupos";
-	public static final String EMAIL = "email";
-
 }
 

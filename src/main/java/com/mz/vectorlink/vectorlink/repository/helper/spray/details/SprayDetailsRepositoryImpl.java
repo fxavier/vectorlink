@@ -1,9 +1,9 @@
-/*package com.mz.vectorlink.vectorlink.repository.helper.spray.details;
+package com.mz.vectorlink.vectorlink.repository.helper.spray.details;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+/*import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -60,7 +60,7 @@ public class SprayDetailsRepositoryImpl implements SprayDetailsRepositoryQueries
 			predicates.add(builder.like(root.get(SprayDetails_.houseHoldId), "%" + sprayDetailsFilter.getHouseHoldId() + "%"));
 		}
 		
-		if(!StringUtils.isEmpty(sprayDetailsFilter.getVillageName())) {
+		if(!StringUtils.isEmpty(sprayDetailsFilter.ge)) {
 			predicates.add(builder.like(builder.lower(root.get(SprayDetails_.village).get(Village_.name)), "%" + sprayDetailsFilter.getVillageName() + "%"));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);

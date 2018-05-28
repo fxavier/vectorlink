@@ -60,6 +60,7 @@ public class UsuariosImpl implements UsuariosQueries {
 	@Transactional(readOnly = true)
 	@Override
 	public Usuario buscarComGrupos(Long codigo) {
+		@SuppressWarnings("deprecation")
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 		criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
 		criteria.add(Restrictions.eq("codigo", codigo));

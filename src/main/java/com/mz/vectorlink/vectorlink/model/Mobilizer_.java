@@ -14,11 +14,5 @@ public abstract class Mobilizer_ {
 	public static volatile SingularAttribute<Mobilizer, Boolean> active;
 	public static volatile SingularAttribute<Mobilizer, Long> id;
 
-	public static final String MOBILIZER_CODE = "mobilizerCode";
-	public static final String DISTRICT = "district";
-	public static final String NAME = "name";
-	public static final String ACTIVE = "active";
-	public static final String ID = "id";
-
 }
 

@@ -11,8 +11,5 @@ public abstract class Permissao_ {
 	public static volatile SingularAttribute<Permissao, Long> codigo;
 	public static volatile SingularAttribute<Permissao, String> nome;
 
-	public static final String CODIGO = "codigo";
-	public static final String NOME = "nome";
-
 }
 

@@ -1,100 +1,85 @@
 package com.mz.vectorlink.vectorlink.repository.helper.spray.totals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.mz.vectorlink.vectorlink.model.SprayOperator_;
 import com.mz.vectorlink.vectorlink.model.SprayTotals;
-import com.mz.vectorlink.vectorlink.model.SprayTotals_;
-import com.mz.vectorlink.vectorlink.model.Village_;
 import com.mz.vectorlink.vectorlink.repository.filter.SprayTotalsFilter;
+import com.mz.vectorlink.vectorlink.repository.paginacao.PaginacaoUtil;
 
 public class SprayTotalsRepositoryImpl implements SprayTotalsRepositoryQueries{
 	
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private PaginacaoUtil paginacaoUtil;
 
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	@Override
-	public Page<SprayTotals> filter(SprayTotalsFilter sprayTotalsFilter, Pageable pageable) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<SprayTotals> criteria = builder.createQuery(SprayTotals.class);
-		Root<SprayTotals> root = criteria.from(SprayTotals.class);
+	public Page<SprayTotals> filter(SprayTotalsFilter filter, Pageable pageable) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(SprayTotals.class);
 		
-		Predicate[] predicates = createRestrictions(sprayTotalsFilter , builder, root);
-		criteria.where(predicates);
+		paginacaoUtil.preparar(criteria, pageable);
+		adicionarFiltro(filter, criteria);
 		
-		TypedQuery<SprayTotals> query = manager.createQuery(criteria);
-		addPaginationRestrictions(query, pageable);
-		return new PageImpl<>(query.getResultList(), pageable, total(sprayTotalsFilter))  ;
+		return new PageImpl<>(criteria.list(), pageable, total(filter));
+		
+	}
+
+	
+	private Long total(SprayTotalsFilter filter) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(SprayTotals.class);
+		adicionarFiltro(filter, criteria);
+		criteria.setProjection(Projections.rowCount());
+		return (Long) criteria.uniqueResult();
 	}
 
 
-
-
-	private Predicate[] createRestrictions(SprayTotalsFilter sprayTotalsFilter, CriteriaBuilder builder,
-			Root<SprayTotals> root) {
-		List<Predicate> predicates = new ArrayList<>();
-		
-		
-		
-		if(!StringUtils.isEmpty(sprayTotalsFilter.getVillageName())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(SprayTotals_.village).get(Village_.name)), 
-					"%" + sprayTotalsFilter.getVillageName().toLowerCase() + "%"));
-
+	private void adicionarFiltro(SprayTotalsFilter filter, Criteria criteria) {
+		if(filter != null) {
+			if(filter.getDistrict() != null) {
+				criteria.add(Restrictions.eq("district", filter.getDistrict()));
+			}
+			
+			if(filter.getOperationalSite() != null) {
+				criteria.add(Restrictions.eq("operationalSite", filter.getOperationalSite()));
+			}
+			
+			if(filter.getLocality() != null) {
+				criteria.add(Restrictions.eq("locality", filter.getLocality()));
+			}
+			
+			if(filter.getVillage() != null) {
+				criteria.add(Restrictions.eq("village", filter.getVillage()));
+			}
+			
+			if(filter.getStartDate() != null) {
+			//	LocalDate startDate = LocalDate.of(filter.getStartDate());
+				criteria.add(Restrictions.ge("startDate", filter.getStartDate()));
+			}
+			
+			if(filter.getEndDate() != null) {
+				criteria.add(Restrictions.le("endDate", filter.getEndDate()));
+			}
 		}
 		
-		if(sprayTotalsFilter.getStartDate() != null){
-			predicates.add(builder.greaterThanOrEqualTo(root.get(SprayTotals_.sprayDate), sprayTotalsFilter.getStartDate()));
-		}
-		
-		if(sprayTotalsFilter.getEndDate() != null) {
-			predicates.add(builder.lessThanOrEqualTo(root.get(SprayTotals_.sprayDate), sprayTotalsFilter.getEndDate()));
-		}
-		
-		if(sprayTotalsFilter.getSopCode() != null) {
-			predicates.add(builder.equal(root.get(SprayTotals_.sprayOperator)
-					.get(SprayOperator_.sprayOperatorCode), sprayTotalsFilter.getSopCode()));
-		}
-
-		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 
-	private void addPaginationRestrictions(TypedQuery<SprayTotals> query, Pageable pageable) {
-		int currentPage = pageable.getPageNumber();
-		int totalRecordsPerPage = pageable.getPageSize();
-		int firstRecordPerpage = currentPage * totalRecordsPerPage;
-		
-		query.setFirstResult(firstRecordPerpage);
-		query.setMaxResults(totalRecordsPerPage);
-	}
-	private Long total(SprayTotalsFilter sprayTotalsFilter) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-		Root<SprayTotals> root = criteria.from(SprayTotals.class);
-		
-		Predicate[] predicates = createRestrictions(sprayTotalsFilter, builder, root);
-		criteria.where(predicates);
-		
-		criteria.select(builder.count(root));
-		return manager.createQuery(criteria).getSingleResult();
-	}
-
-
-
+	
 
 	@Override
 	public SprayTotals findBySprayDetailsReference(String reference) {
@@ -103,6 +88,11 @@ public class SprayTotalsRepositoryImpl implements SprayTotalsRepositoryQueries{
 				.setParameter("referencia", reference)
 				.getSingleResult();
 	}
+
+
+
+
+	
 
 
 	

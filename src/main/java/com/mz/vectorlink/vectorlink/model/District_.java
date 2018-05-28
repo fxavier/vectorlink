@@ -12,9 +12,5 @@ public abstract class District_ {
 	public static volatile SingularAttribute<District, Boolean> active;
 	public static volatile SingularAttribute<District, Long> id;
 
-	public static final String NAME = "name";
-	public static final String ACTIVE = "active";
-	public static final String ID = "id";
-
 }
 
