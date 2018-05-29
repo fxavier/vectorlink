@@ -70,6 +70,18 @@ public class MobilizationTotals implements Serializable{
 	private Mobilizer mobilizer;
 	
 	@ManyToOne
+	@JoinColumn(name = "district_id")
+	private District district;
+	
+	@ManyToOne
+	@JoinColumn(name = "operational_site_id")
+	private OperationalSite operationalSite;
+	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
+	@ManyToOne
 	@JoinColumn(name = "village_id")
 	private Village village;
 	
@@ -179,6 +191,30 @@ public class MobilizationTotals implements Serializable{
 
 	public void setMobilizer(Mobilizer mobilizer) {
 		this.mobilizer = mobilizer;
+	}
+	
+	public District getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(District district) {
+		this.district = district;
+	}
+
+	public OperationalSite getOperationalSite() {
+		return operationalSite;
+	}
+
+	public void setOperationalSite(OperationalSite operationalSite) {
+		this.operationalSite = operationalSite;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 
 	public Village getVillage() {

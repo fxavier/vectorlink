@@ -144,7 +144,7 @@
                         <tbody>
                           <tr th:each="sprayTotals : ${pagina.conteudo}">
 								<td th:text="${{sprayTotals.sprayDate}}"></td>
-								<td th:text="${sprayTotals.village.locality.operationalSite.district.name}"></td>
+								<td th:text="${sprayTotals.district.name}"></td>
 								<td th:text="${sprayTotals.sprayedStructures}"></td>
 								<td th:text="${sprayTotals.sprayedMan}"></td>
 								<td th:text="${sprayTotals.sprayedWomen}"></td>
@@ -172,7 +172,7 @@
 						</td>
 					</tr>
 					<tr th:if="${pagina.vazia}">
-					   <td colspan="15">Nenhum produto encontrado</td>
+					   <td colspan="15">Nenhum total encontrado</td>
 					</tr>
                         </tbody>
                   </table>

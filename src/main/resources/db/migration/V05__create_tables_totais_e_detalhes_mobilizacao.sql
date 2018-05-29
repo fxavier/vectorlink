@@ -13,12 +13,21 @@ spray_accpetance_yes BIGINT NOT NULL,
 spray_acceptance_no BIGINT NOT NULL,
 reference VARCHAR(100),
 mobilizer_id BIGINT,
-village_id BIGINT,
+village_id BIGINT(20) NOT NULL,
+district_id BIGINT(20) NOT NULL,
+operational_site_id BIGINT(20) NOT NULL,
+locality_id BIGINT(20) NOT NULL,
 PRIMARY KEY(id),
 CONSTRAINT fk_total_mob_mobilizer
      FOREIGN KEY(mobilizer_id) REFERENCES mobilizer(id),
 CONSTRAINT fk_total_mob_village
-     FOREIGN KEY(village_id) REFERENCES village(id)     
+     FOREIGN KEY(village_id) REFERENCES village(id),   
+CONSTRAINT fk_total_mob_district
+     FOREIGN KEY(district_id) REFERENCES district(id),
+CONSTRAINT fk_total_mob_opsite
+     FOREIGN KEY(operational_site_id) REFERENCES operational_site(id),
+CONSTRAINT fk_total_mob_locality
+     FOREIGN KEY(locality_id) REFERENCES locality(id)     
 
 );
 

@@ -78,7 +78,6 @@ public class SprayTotalsRepositoryImpl implements SprayTotalsRepositoryQueries{
 		}
 		
 	}
-
 	
 
 	@Override

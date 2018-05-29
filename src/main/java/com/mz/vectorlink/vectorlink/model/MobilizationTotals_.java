@@ -10,13 +10,16 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class MobilizationTotals_ {
 
 	public static volatile SingularAttribute<MobilizationTotals, Long> womenSentitizedNo;
+	public static volatile SingularAttribute<MobilizationTotals, Locality> locality;
 	public static volatile SingularAttribute<MobilizationTotals, Long> sentitizedStructrsYes;
 	public static volatile SingularAttribute<MobilizationTotals, String> reference;
 	public static volatile SingularAttribute<MobilizationTotals, Long> sentitizedStructuresNo;
+	public static volatile SingularAttribute<MobilizationTotals, OperationalSite> operationalSite;
 	public static volatile SingularAttribute<MobilizationTotals, Long> menSentitizedYes;
 	public static volatile SingularAttribute<MobilizationTotals, Long> menSentitizedNo;
 	public static volatile SingularAttribute<MobilizationTotals, Long> womenSentitizedYes;
 	public static volatile SingularAttribute<MobilizationTotals, Long> sprayAcceptanceYes;
+	public static volatile SingularAttribute<MobilizationTotals, District> district;
 	public static volatile SingularAttribute<MobilizationTotals, LocalDate> mobDate;
 	public static volatile SingularAttribute<MobilizationTotals, Mobilizer> mobilizer;
 	public static volatile SingularAttribute<MobilizationTotals, Usuario> usuario;

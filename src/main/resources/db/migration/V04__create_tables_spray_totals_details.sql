@@ -17,16 +17,25 @@ insecticide_issued BIGINT,
 insecticide_full_returned BIGINT,
 insecticide_empty_returned BIGINT,
 reference VARCHAR(100),
-village_id BIGINT NOT NULL,
+village_id BIGINT(20) NOT NULL,
 sop_id BIGINT NOT NULL,
 tl_id BIGINT NOT NULL,
+district_id BIGINT(20) NOT NULL,
+operational_site_id BIGINT(20) NOT NULL,
+locality_id BIGINT(20) NOT NULL,
 PRIMARY KEY(id),
 CONSTRAINT fk_total_spray_village
      FOREIGN KEY(village_id) REFERENCES village(id),
 CONSTRAINT fk_total_spray_team_leader
      FOREIGN KEY(tl_id) REFERENCES team_leader(id),     
 CONSTRAINT fk_total_spray_sop
-     FOREIGN KEY(sop_id) REFERENCES spray_operator(id)
+     FOREIGN KEY(sop_id) REFERENCES spray_operator(id),
+CONSTRAINT fk_total_spray_district
+     FOREIGN KEY(district_id) REFERENCES district(id),
+CONSTRAINT fk_total_spray_opsite
+     FOREIGN KEY(operational_site_id) REFERENCES operational_site(id),
+CONSTRAINT fk_total_spray_locality
+     FOREIGN KEY(locality_id) REFERENCES locality(id)
 
 );
 
