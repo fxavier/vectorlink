@@ -8,6 +8,6 @@ import com.mz.vectorlink.vectorlink.repository.filter.SprayDetailsFilter;
 
 public interface SprayDetailsRepositoryQueries {
 	
-//	public Page<SprayDetails> filter(SprayDetailsFilter sprayDetailsFilter, Pageable pageable);
+	public Page<SprayDetails> filter(SprayDetailsFilter filter, Pageable pageable);
 
 }

@@ -17,6 +17,7 @@ import com.mz.vectorlink.vectorlink.model.SprayDetails;
 import com.mz.vectorlink.vectorlink.model.SprayStatus;
 import com.mz.vectorlink.vectorlink.repository.DistrictRepository;
 import com.mz.vectorlink.vectorlink.service.SprayDetailsService;
+import com.mz.vectorlink.vectorlink.service.exception.CadastroDetalheException;
 
 @Controller
 @RequestMapping("/detalhes_pulverizacao")
@@ -47,9 +48,14 @@ public class SprayDetailsController {
 	    	return novo(sprayDetails);
 	    }
 	    
+	    try {
+	    	
+	    	sprayDetailsService.salvar(sprayDetails);
+	    } catch(CadastroDetalheException e) {
+	    	result.rejectValue("referencia", e.getMessage(), e.getMessage());
+	    	return novo(sprayDetails);
+	    }
 	    
-	    
-	   sprayDetailsService.salvar(sprayDetails);
 	    attributes.addFlashAttribute("mensagem", "Detalhe de pulverizacao adicionado com sucesso");
 	    return new ModelAndView("redirect:/detalhes_pulverizacao/novo");
 	}

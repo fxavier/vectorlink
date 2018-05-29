@@ -41,12 +41,12 @@ Vectorlink.ComboOpSite = (function() {
 	
 	function onOpSiteAlterado(){
 		this.emitterOpSite.trigger('alterado', this.combo.val());
-
 	}
 	
 	function onDistritoAlterado(evento, codigoDistrito) {
 		this.inputHiddenOpSiteSelecionado.val('');
 		inicializarOpSites.call(this, codigoDistrito);
+		
 	}
 	
 	function inicializarOpSites(codigoDistrito) {
@@ -67,6 +67,7 @@ Vectorlink.ComboOpSite = (function() {
 	
 	function onBuscarOpSitesFinalizado(operationalSite) {
 		var options = [];
+		options.push('<option value="">' + "Selecione a base operacional" + '</option>');
 		operationalSite.forEach(function(operationalSite) {
 			options.push('<option value="' + operationalSite.id + '">' + operationalSite.name + '</option>');
 		});
@@ -93,6 +94,7 @@ Vectorlink.ComboOpSite = (function() {
 	
 	function finalizarRequisicao() {
 		this.imgLoading.hide();
+		
 	}
 	
 	return ComboOpSite;
@@ -147,6 +149,7 @@ Vectorlink.ComboLocalidade = (function() {
 	
 	function onBuscarLocalidadesFinalizado(localidades) {
 		var options = [];
+		options.push('<option value="">' + "Selecione a localidade" + '</option>');
 		localidades.forEach(function(locality) {
 			options.push('<option value="' + locality.id + '">' + locality.name + '</option>');
 		});
@@ -219,6 +222,7 @@ Vectorlink.ComboBairro = (function(){
 
 	function onBuscarBairrosFinalizado(bairros) {
 		var options = [];
+		options.push('<option value="">' + "Selecione o bairro" + '</option>');
 		bairros.forEach(function(village) {
 			options.push('<option value="' + village.id + '">' + village.name + '</option>');
 		});

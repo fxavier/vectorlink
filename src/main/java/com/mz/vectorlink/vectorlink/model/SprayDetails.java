@@ -101,13 +101,17 @@ public class SprayDetails implements Serializable{
 	
 	private String reference;
 	
-	@Transient
+
+	@ManyToOne
+	@JoinColumn(name = "district_id")
 	private District district;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "operational_site_id")
 	private OperationalSite operationalSite;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
 	private Locality locality;
 	
 	@NotNull

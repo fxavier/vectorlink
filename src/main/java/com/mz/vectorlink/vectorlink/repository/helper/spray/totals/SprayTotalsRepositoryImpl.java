@@ -1,5 +1,7 @@
 package com.mz.vectorlink.vectorlink.repository.helper.spray.totals;
 
+import java.time.LocalDate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -68,12 +70,13 @@ public class SprayTotalsRepositoryImpl implements SprayTotalsRepositoryQueries{
 			}
 			
 			if(filter.getStartDate() != null) {
-			//	LocalDate startDate = LocalDate.of(filter.getStartDate());
-				criteria.add(Restrictions.ge("startDate", filter.getStartDate()));
+				LocalDate startDate = LocalDate.of(filter.getStartDate().getYear(), filter.getStartDate().getMonth(), filter.getStartDate().getDayOfMonth());
+				criteria.add(Restrictions.ge("sprayDate", startDate));
 			}
 			
 			if(filter.getEndDate() != null) {
-				criteria.add(Restrictions.le("endDate", filter.getEndDate()));
+				LocalDate endDate = LocalDate.of(filter.getEndDate().getYear(), filter.getEndDate().getMonth(), filter.getEndDate().getDayOfMonth());
+				criteria.add(Restrictions.le("sprayDate", endDate));
 			}
 		}
 		
