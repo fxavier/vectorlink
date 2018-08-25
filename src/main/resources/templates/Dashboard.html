@@ -25,18 +25,18 @@
 					<div class="aw-box__icon">
 						<i class="fa  fa-heartbeat  fa-3x"></i>
 					</div>
-					<div class="aw-box__value">145</div>
-					<div class="aw-box__title">Valor</div>
+					<div class="aw-box__value">1,239</div>
+					<div class="aw-box__title">Supervisoes realizadas</div>
 				</div>
 			</div>
 			
 			<div class="col-sm-4">
 				<div class="aw-box">
 					<div class="aw-box__icon">
-						<i class="fa  fa-hashtag  fa-3x"></i>
+						<i class="fa fa-flag  fa-3x"></i>
 					</div>
-					<div class="aw-box__value">123</div>
-					<div class="aw-box__title">Itens</div>
+					<div class="aw-box__value">715</div>
+					<div class="aw-box__title">Alertas Vermelhas</div>
 				</div>
 			</div>
 			
@@ -45,57 +45,23 @@
 					<div class="aw-box__icon">
 						<i class="fa  fa-users  fa-3x"></i>
 					</div>
-					<div class="aw-box__value">9</div>
-					<div class="aw-box__title">Total</div>
+					<div class="aw-box__value">97</div>
+					<div class="aw-box__title">Total de supervisores</div>
 				</div>
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="aw-box">
-					<div class="aw-box__icon">
-						<i class="fa  fa-usd  fa-3x"></i>
-					</div>
-					<div class="aw-box__value">2,546</div>
-					<div class="aw-box__title">Total</div>
-				</div>
-			</div>
-			
-			<div class="col-sm-4">
-				<div class="aw-box">
-					<div class="aw-box__icon">
-						<i class="fa  fa-signal  fa-3x"></i>
-					</div>
-					<div class="aw-box__value">654</div>
-					<div class="aw-box__title"></div>
-				</div>
-			</div>
-			
-			<div class="col-sm-4">
-				<div class="aw-box">
-					<div class="aw-box__icon">
-						<i class="fa  fa-shopping-cart  fa-3x"></i>
-					</div>
-					<div class="aw-box__value">784</div>
-					<div class="aw-box__title">Ticket médio</div>
-				</div>
-			</div>
-		</div>
-
+		
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="aw-graph-box">
 					<div class="aw-graph-box__header">
-						<h2 class="aw-graph-box__title">Item <small>últimos 6 meses</small></h2>
+						<h2 class="aw-graph-box__title">Item <small>Alertas Vermelhas</small></h2>
 					</div>
 					<div class="aw-graph-box__content">
-						<!-- <div class="aw-graph-box__no-data">
-							<i class="fa  fa-line-chart  fa-2x"></i>
-							<span>Não há dados</span>
-						</div> -->
+						
 						<div>
-							<canvas id="graficoVendasPorMes" height="160"></canvas>
+							<canvas id="graficoTotalAlertasVermelhas" height="160"></canvas>
 						</div>
 					</div>
 				</div>
@@ -104,15 +70,12 @@
 			<div class="col-sm-6">
 				<div class="aw-graph-box">
 					<div class="aw-graph-box__header">
-						<h2 class="aw-graph-box__title">Item <small>últimos 6 meses</small></h2>
+						<h2 class="aw-graph-box__title">Item <small>Numero de supervisoes</small></h2>
 					</div>
 					<div class="aw-graph-box__content">
-						<!-- <div class="aw-graph-box__no-data">
-							<i class="fa  fa-line-chart  fa-2x"></i>
-							<span>Não há dados</span>
-						</div> -->
+						
 						<div>
-							<canvas id="graficoVendasPorOrigem" height="160"></canvas>
+							<canvas id="graficoSupervisoes" height="160"></canvas>
 						</div>
 					</div>
 				</div>
@@ -121,9 +84,76 @@
 	</div>
 </section>
 
-<!-- <th:block layout:fragment="javascript-extra">
+<th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/vendors/Chart.min.js}"></script>
-	<script th:src="@{/javascripts/dashboard.graficos.js}"></script>
-</th:block> -->
+	<script>
+	var ctx = document.getElementById("graficoTotalAlertasVermelhas").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Mocuba", "Milange", "Maganja da Costa", "Derre", "Mopeia", "Morrumbala", "Molumbo"],
+	        datasets: [{
+	            label: '# Alertas vermelhas',
+	            data: [120, 97, 115, 86, 75, 122,100],
+	            backgroundColor: [
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)'
+	            ],
+	
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+	<script>
+	var ctx = document.getElementById("graficoSupervisoes").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Mocuba", "Milange", "Maganja da Costa", "Derre", "Mopeia", "Morrumbala", "Molumbo"],
+	        datasets: [{
+	            label: '# de supervisoes realizadas',
+	            data: [200, 280, 120, 80, 92, 270, 197],
+	            backgroundColor: [
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)'
+	            ],
+	
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+</th:block>
 
 </html>

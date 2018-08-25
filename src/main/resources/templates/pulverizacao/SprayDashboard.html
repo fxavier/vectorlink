@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:clinic="http://brewer.algaworks.com"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<head>
+	<title>Dashboard</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>Dashboard</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-heartbeat  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">76%</div>
+					<div class="aw-box__title">Spray Progress (%) (Based on Targeted Structures)</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa fa-heartbeat  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">92%</div>
+					<div class="aw-box__title">Spray Coverage (%) (Based on Structures Found by Spray Operators</div>
+				</div>
+			</div>
+			
+			<!-- <div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-users  fa-3x"></i>
+						<div class="aw-box__title"><strong>Reasons not sprayed</strong></div>
+					</div>
+					<div class="aw-box__title">Closed</div>
+					<div class="aw-box__value">90</div>
+					<div class="aw-box__title">Closed</div>
+					<div class="aw-box__value">90</div>
+					<div class="aw-box__title">Closed</div>
+					<div class="aw-box__value">90</div>
+					<div class="aw-box__title">Closed</div>
+					<div class="aw-box__value">90</div>
+					<div class="aw-box__title">Closed</div>
+					<div class="aw-box__value">90</div>
+				</div>
+			</div> -->
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Item <small>Spray Progress</small></h2>
+					</div>
+					<div class="aw-graph-box__content">
+						
+						<div class="chart-container">
+							<canvas id="graficoSprayProgress" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Item <small>Spray Coverage</small></h2>
+					</div>
+					<div class="aw-graph-box__content">
+						
+						<div class="chart-container">
+							<canvas id="graficoSprayCoverage" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Item <small>Reasons not sprayed</small></h2>
+					</div>
+					<div class="aw-graph-box__content">
+						
+						<div class="chart-container">
+							<canvas id="graficoReasonsNotSprayed" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/Chart.min.js}"></script>
+	<script>
+	var ctx = document.getElementById("graficoSprayProgress").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Mocuba", "Milange", "Maganja da Costa", "Derre", "Mopeia", "Morrumbala", "Molumbo"],
+	        datasets: [{
+	            label: 'Spray Progress Based on Target Structures(%)',
+	            data: [43, 52, 35, 27, 47, 52,39],
+	            backgroundColor: [
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)'
+	            ],
+	
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+	<script>
+	var ctx = document.getElementById("graficoSprayCoverage").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Mocuba", "Milange", "Maganja da Costa", "Derre", "Mopeia", "Morrumbala", "Molumbo"],
+	        datasets: [{
+	            label: 'Spray Coverage Based on structures Found(%)',
+	            data: [200, 280, 120, 80, 92, 270, 197],
+	            backgroundColor: [
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)'
+	            ],
+	
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+	<script>
+	var ctx = document.getElementById("graficoReasonsNotSprayed").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Mocuba", "Milange", "Maganja da Costa", "Derre", "Mopeia", "Morrumbala", "Molumbo"],
+	        datasets: [{
+	            label: 'Refused',
+	            data: [963, 1180, 788, 268, 605, 1071, 448],
+	            backgroundColor: [
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)',
+	                'rgba(26,179,148,0.5)'
+	            ],
+	
+	            borderWidth: 1
+	        },
+	        {
+	            label: 'Closed',
+	            data: [2539, 2388, 913, 717, 534, 978, 2252],
+	            backgroundColor: [
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)',
+	            	'rgba(255, 99, 132, 0.2)'
+	            ],
+	
+	            borderWidth: 1
+	        }, {
+	            label: 'Sick',
+	            data: [620, 410, 210, 111, 53, 201, 288],
+	            backgroundColor: [
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)',
+	            	'rgba(153, 102, 255, 0.2)'
+	            ],
+	
+	            borderWidth: 1
+	        },
+	        {
+	            label: 'Funeral',
+	            data: [545, 278, 285, 75, 293, 238, 303],
+	            backgroundColor: [
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)',
+	            	'rgba(255, 206, 86, 0.2)'
+	            ],
+	
+	            borderWidth: 1
+	        },
+	        {
+	            label: 'Other',
+	            data: [43, 52, 35, 27, 47, 52,39],
+	            backgroundColor: [
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)',
+	            	'rgba(75, 192, 192, 0.2)'
+	            	
+	            ],
+	
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+</th:block>
+
+</html>

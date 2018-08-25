@@ -1,5 +1,5 @@
    CREATE TABLE dos_totals (
-    id BIGINT AUTO_INCREMENT,
+    id BIGSERIAL,
     data DATE NOT NULL,
     SOPMixFor75Sim BIGINT NOT NULL,
     SOPMixFor75Nao BIGINT NOT NULL,
@@ -23,9 +23,9 @@
     existeSubreposicao5cmNao BIGINT NOT NULL,
     tl_id BIGINT NOT NULL,
     village_id BIGINT NOT NULL,
-    district_id BIGINT(20) NOT NULL,
-    operational_site_id BIGINT(20) NOT NULL,
-    locality_id BIGINT(20) NOT NULL,
+    district_id BIGINT NOT NULL,
+    operational_site_id BIGINT NOT NULL,
+    locality_id BIGINT NOT NULL,
     PRIMARY KEY(id),
     CONSTRAINT fk_dos_totals_tl
        FOREIGN KEY(tl_id) REFERENCES team_leader(id),
@@ -40,7 +40,7 @@
    );
    
    CREATE TABLE dos_details (
-    id BIGINT AUTO_INCREMENT,
+    id BIGSERIAL,
     data DATE NOT NULL,
     SOPMixFor75 VARCHAR(20) NOT NULL,
     SOPEnxaugou3vezes VARCHAR(20) NOT NULL,
@@ -52,7 +52,7 @@
     SOPPulvComDist45cmParede VARCHAR(20) NOT NULL,
     SOPMantemVelocCorrecta VARCHAR(20) NOT NULL,
     existeSubreposicao5cm VARCHAR(20),
-    dos_totals_id BIGINT(20) NOT NULL,
+    dos_totals_id BIGINT NOT NULL,
     PRIMARY KEY(id),    
     CONSTRAINT fk_dos_details_totals
        FOREIGN KEY(dos_totals_id) REFERENCES dos_totals(id) 

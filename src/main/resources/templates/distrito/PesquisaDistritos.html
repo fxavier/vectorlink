@@ -7,7 +7,7 @@
 	xmlns:brewer="http://brewer.algaworks.com">
 	
 <head>
-	<title>Pesquisa de distritos</title>
+	<title>Lista de distritos</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 				
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/distritos/novo}">
+						<a class="btn  btn-success" th:href="@{/distritos/novo}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Adicionar Novo</span>
 						</a>
 					</div>
@@ -31,7 +31,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${distritoFilter}" th:action="@{/distritos}">
+		<form method="GET" th:object="${distrito}" th:action="@{/distritos}">
 			<div class="row">
 				<div class="form-group  col-sm-12">
 					<label class="control-label" for="nome">Nome</label>

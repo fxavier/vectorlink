@@ -28,7 +28,7 @@ import com.mz.vectorlink.vectorlink.validation.AtributoConfirmacao;
 
 @AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha", message = "As senhas não conferem")
 @Entity
-@Table(name = "usuario")
+@Table(name = "users")
 @DynamicUpdate
 public class Usuario implements Serializable {
 

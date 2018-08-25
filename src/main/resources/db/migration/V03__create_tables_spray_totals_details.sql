@@ -1,5 +1,5 @@
 CREATE TABLE spray_totals(
-id BIGINT AUTO_INCREMENT,
+id BIGSERIAL,
 spray_date DATE NOT NULL,
 sprayed_structures BIGINT NOT NULL,
 sprayed_man BIGINT NOT NULL,
@@ -13,35 +13,25 @@ not_sprayed_pregnant_women BIGINT NOT NULL,
 not_sprayed_children BIGINT NOT NULL,
 rooms_found BIGINT NOT NULL,
 rooms_sprayed BIGINT NOT NULL,
-insecticide_issued BIGINT,
-insecticide_full_returned BIGINT,
-insecticide_empty_returned BIGINT,
+insecticide_issued INTEGER,
+insecticide_full_returned INTEGER,
+insecticide_empty_returned INTEGER,
 reference VARCHAR(100),
-village_id BIGINT(20) NOT NULL,
+village_id BIGINT NOT NULL,
 sop_id BIGINT NOT NULL,
 tl_id BIGINT NOT NULL,
-district_id BIGINT(20) NOT NULL,
-operational_site_id BIGINT(20) NOT NULL,
-locality_id BIGINT(20) NOT NULL,
 PRIMARY KEY(id),
 CONSTRAINT fk_total_spray_village
      FOREIGN KEY(village_id) REFERENCES village(id),
-CONSTRAINT fk_total_spray_team_leader
+CONSTRAINT fk_total_sprat_team_leader
      FOREIGN KEY(tl_id) REFERENCES team_leader(id),     
 CONSTRAINT fk_total_spray_sop
-     FOREIGN KEY(sop_id) REFERENCES spray_operator(id),
-CONSTRAINT fk_total_spray_district
-     FOREIGN KEY(district_id) REFERENCES district(id),
-CONSTRAINT fk_total_spray_opsite
-     FOREIGN KEY(operational_site_id) REFERENCES operational_site(id),
-CONSTRAINT fk_total_spray_locality
-     FOREIGN KEY(locality_id) REFERENCES locality(id)
-
+     FOREIGN KEY(sop_id) REFERENCES spray_operator(id)
 );
 
 CREATE TABLE spray_details(
-id BIGINT AUTO_INCREMENT,
-spray_date DATE NOT NULL,
+id BIGSERIAL,
+spray_date DATE  NOT NULL,
 household_name VARCHAR(100) NOT NULL,
 gender_person_interviwed VARCHAR(10),
 household_id VARCHAR(30) NOT NULL,
@@ -50,25 +40,25 @@ sprayed_men BIGINT,
 sprayed_women BIGINT,
 sprayed_pregnant_women BIGINT,
 sprayed_children BIGINT,
-reason_not_sprayed VARCHAR(50),
 not_sprayed_men BIGINT,
 not_sprayed_women BIGINT,
 not_sprayed_pregnant_women BIGINT,
 not_sprayed_children BIGINT,
+insecticide_issued INTEGER,
+insecticide_full_returned INTEGER,
+insecticide_empty_returned INTEGER,
 rooms_found BIGINT,
 rooms_sprayed BIGINT,
 reference VARCHAR(100),
-spray_totals_id BIGINT(20),
-village_id BIGINT NOT NULL,
+village_id BIGINT  NOT NULL,
 sop_id BIGINT NOT NULL,
 tl_id BIGINT NOT NULL,
 PRIMARY KEY(id),
-CONSTRAINT fk_spray_details_totals
-   FOREIGN KEY(spray_totals_id) REFERENCES spray_totals(id),
-CONSTRAINT fk_village_spray_details
-  FOREIGN KEY(village_id) REFERENCES village(id),
-CONSTRAINT fk_sop_spray_details
-  FOREIGN KEY(sop_id) REFERENCES spray_operator(id),
-CONSTRAINT fk_spray_details_tl
-  FOREIGN KEY(tl_id) REFERENCES team_leader(id)
+CONSTRAINT fk_detail_spray_sop
+     FOREIGN KEY(sop_id) REFERENCES spray_operator(id),
+CONSTRAINT fk_detail_sprat_village
+     FOREIGN KEY(village_id) REFERENCES village(id),
+CONSTRAINT fk_detail_spray_team_leader
+     FOREIGN KEY(tl_id) REFERENCES team_leader(id)
+
 );
