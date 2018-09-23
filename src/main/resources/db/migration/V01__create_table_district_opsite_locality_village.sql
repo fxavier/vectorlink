@@ -36,3 +36,4 @@ PRIMARY KEY(id),
 CONSTRAINT fk_village_locality
      FOREIGN KEY(locality_id) REFERENCES village(id)
 );
+

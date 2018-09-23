@@ -1,5 +1,6 @@
 package com.mz.vectorlink.vectorlink.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -27,6 +28,7 @@ public class TeamLeader implements Serializable{
 	@Column(name = "tl_code")
 	private Long teamLeaderCode;
 	
+	@NotNull
 	private String name;
 	
 	
@@ -74,6 +76,11 @@ public class TeamLeader implements Serializable{
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	
+	@Transient
+	public Boolean isNovo() {
+		return this.id == null;
 	}
 
 	@Override

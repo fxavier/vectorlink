@@ -32,20 +32,13 @@
 
 	<div class="container-fluid">
 	     
-		<form method="POST" th:object="${locality}" th:action="@{/localidades/novo}">
+		<form method="POST" th:object="${locality}" th:action="@{/localidades/nova}" autocomplete="off">
             <vectorlink:message/>
 		  <input type="hidden" th:field="*{id}"/>
-		  
-		  <div class="row">
-				<div class="form-group  col-sm-12  bw-required" vectorlink:classforerror="name">
-					<label for="name" class="control-label">Name</label>
-					<input type="text" class="form-control" id="name" autofocus="autofocus" th:field="*{name}"/>
-				</div>
-			</div>
-		   
+		    
 		   <div class="row">	
 				
-			    <div class="col-sm-4  form-group bw-required"  vectorlink:classforerror="district">
+			    <div class="col-sm-6  form-group bw-required"  vectorlink:classforerror="district">
 			      <label for="district" class="control-label" >Distrito</label>
 			       <select id="district" class="form-control" th:field="*{district}">
 			         <option value="">Selecione o distrito</option> 
@@ -53,7 +46,7 @@
 			       </select> 
 			    </div>
 			    
-			     <div class="col-sm-4  form-group bw-required"  vectorlink:classforerror="operationalSite">
+			     <div class="col-sm-6  form-group bw-required"  vectorlink:classforerror="operationalSite">
 			      <label for="operationalSite" class="control-label" >Base Operacional</label>
 			      <div class="bw-field-action">
 			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
@@ -65,7 +58,16 @@
 			       </div>
 			       </div>
 			    </div>  
-			  </div>  			
+			    
+			    
+			  </div>  	
+			  
+			   <div class="row">
+				<div class="form-group  col-sm-12  bw-required" vectorlink:classforerror="name">
+					<label for="name" class="control-label">Name</label>
+					<input type="text" class="form-control" id="name" autofocus="autofocus" th:field="*{name}"/>
+				</div>
+			</div>		
 	
 			<button type="submit" class="btn  btn-primary">Salvar</button>				
 		</form>

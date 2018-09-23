@@ -11,7 +11,7 @@ INSERT INTO permissao VALUES (6, 'ROLE_CADASTRAR_TOTAIS_DOS');
 INSERT INTO permissao VALUES (7, 'ROLE_CADASTRAR_DETALHES_DOS');
 INSERT INTO permissao VALUES (8, 'ROLE_CADASTRAR_USUARIOS');
 
-INSERT INTO users VALUES ('1', 'admin', 'admin@pmivectorlink', '$2a$10$fvMZAEn9LprgOqS7pBIdruwOdjc8trfEHy6eyBPYWYpt9/8dF51D.', '1');
+INSERT INTO users VALUES ('1', 'admin', 'admin@pmivectorlink.com', '$2a$10$fvMZAEn9LprgOqS7pBIdruwOdjc8trfEHy6eyBPYWYpt9/8dF51D.', '1');
 
 
 INSERT INTO usuario_grupo VALUES(1,1);

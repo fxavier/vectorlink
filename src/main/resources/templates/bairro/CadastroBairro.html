@@ -32,7 +32,7 @@
 
 	<div class="container-fluid">
 	     
-		<form method="POST" th:object="${village}" th:action="@{/bairros/novo}">
+		<form method="POST" th:object="${village}" th:action="@{/bairros/novo}" autocomplete="off">
 		   <vectorlink:message/>
 		  <input type="hidden" th:field="*{id}"/>
 										

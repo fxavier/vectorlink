@@ -86,6 +86,11 @@ public class SprayOperator implements Serializable{
 	public Boolean isActive() {
 		return active == true;
 	}
+	
+	@Transient
+	public Boolean isNovo() {
+		return this.id == null;
+	}
 
 	@Override
 	public int hashCode() {

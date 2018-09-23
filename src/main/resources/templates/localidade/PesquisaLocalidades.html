@@ -4,6 +4,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="'layout/LayoutPadrao'"
 	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:vectorlink="http://vectorlink.abt.com"
 	xmlns:brewer="http://brewer.algaworks.com">
 	
 <head>
@@ -21,8 +22,8 @@
 				
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/localidades/nova}">
-							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Adicionar Novo</span>
+						<a class="btn  btn-success" th:href="@{/localidades/nova}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Adicionar Nova</span>
 						</a>
 					</div>
 				</div>
@@ -31,23 +32,37 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${localidadeFilter}" th:action="@{/localidades}">
+		<form method="GET" th:object="${localityFilter}" th:action="@{/localidades}" autocomplete="off">
 			<div class="row">
-				<div class="form-group  col-sm-12">
-					<label class="control-label" for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
-				</div>
-			</div>
 			
-			<div class="row">
-				<div class="form-group  col-sm-6">
-					<label class="control-label" for="distrito">Distrito</label>
-					<select id="distrito" class="form-control" th:field="*{distrito}">
-	                    <option value="">Todos os distritos</option>
-	                    <option th:each="distrito : ${distritos}" th:text="${distrito.nome}" th:value="${distrito.codigo}"></option>
+			    <div class="form-group  col-sm-4">
+					<label class="control-label" for="district">Distrito</label>
+					<select id="district" class="form-control" th:field="*{district}">
+	                    <option value="">Todos</option>
+	                    <option th:each="distrito : ${districts}" th:text="${distrito.name}" th:value="${distrito.id}"></option>
 	                </select>
 				</div>
-			</div>	
+				
+				 <div class="col-sm-4  form-group bw-required"  vectorlink:classforerror="operationalSite">
+			      <label for="operationalSite" class="control-label" >Base Operacional</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
+			       <select id="operationalSite" class="form-control" data:url="@{/opsites}" th:field="*{operationalSite}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div>  
+			    
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="name" autofocus="autofocus" th:field="*{name}"/>
+				</div>
+			</div>
+		 
+			
 
 			
 			<button type="submit" class="btn  btn-primary">Pesquisar</button>
@@ -57,27 +72,23 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th>Código</th>
-					
-						<th>
-							<th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'distrito', 'Distrito')"></th:block>
-						</th>
-						<th>
-							<th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'localidade', 'Localidade')"></th:block>
-						</th>
-						
+						<th>Distrito</th>
+					    <th>Base Operacional</th>
+					    <th>Nome</th>
+					    						
 						<th class="table-col-acoes">Acções</th>
 					</tr>
 				</thead>
 				
 				<tbody>
 					<tr th:each="localidade : ${pagina.conteudo}">
-						<td th:text="${localidade.codigo}">1</td>
-						<td th:text="${localidade.distrito.nome}"></td>
-						<td th:text="${localidade.nome}"></td>
+						<td th:text="${localidade.operationalSite.district.name}"></td>
+						<td th:text="${localidade.operationalSite.name}"></td>
+						<td th:text="${localidade.name}"></td>
+						
 						
 						<td>
-							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
+							<!-- <a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
 							    th:href="@{/localidades/{codigo}(codigo=${localidade.codigo})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
@@ -85,7 +96,7 @@
 							  data:url="@{/localidades/{codigo}(codigo=${localidade.codigo})}"
 							  data:objecto="${localidade.nome}">
 							    <i class="glyphicon glyphicon-remove"></i>
-							</a>
+							</a> -->
 						</td>
 					</tr>
 					<tr th:if="${pagina.vazia}">
@@ -118,4 +129,7 @@
 
 </section>
 </body>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vectorlink.combos-distrito-operationalSite.js}"></script>
+</th:block>
 </html>

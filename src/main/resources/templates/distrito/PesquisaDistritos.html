@@ -31,11 +31,11 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${distrito}" th:action="@{/distritos}">
+		<form method="GET" th:object="${district}" th:action="@{/distritos}">
 			<div class="row">
 				<div class="form-group  col-sm-12">
 					<label class="control-label" for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{name}"/>
 				</div>
 			</div>
 			
@@ -48,7 +48,7 @@
 					<tr>
 						<th>Código</th>
 						<th>
-							<th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'nome', 'Nome')"></th:block>
+							<th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'name', 'Nome')"></th:block>
 						</th>
 						<th class="table-col-acoes">Acções</th>
 					</tr>
@@ -56,16 +56,16 @@
 				
 				<tbody>
 					<tr th:each="distrito : ${pagina.conteudo}">
-						<td th:text="${distrito.codigo}">1</td>
-						<td th:text="${distrito.nome}"></td>
+						<td th:text="${district.id}">1</td>
+						<td th:text="${district.name}"></td>
 						<td>
 							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
-							    th:href="@{/distritos/{codigo}(codigo=${distrito.codigo})}" > 
+							    th:href="@{/distritos/{codigo}(codigo=${district.id})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#"
-							  data:url="@{/distritos/{codigo}(codigo=${distrito.codigo})}"
-							  data:objecto="${distrito.nome}">
+							  data:url="@{/distritos/{codigo}(codigo=${district.id})}"
+							  data:objecto="${distritc.name}">
 							    <i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>

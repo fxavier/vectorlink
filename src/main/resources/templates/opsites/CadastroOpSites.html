@@ -31,19 +31,24 @@
 	</div>
 
 	<div class="container-fluid">
-	   <form method="POST" th:object="${operationalSite}" th:action="@{/opsites/novo}">
+	   <form method="POST" th:object="${operationalSite}" th:action="@{/opsites/novo}" autocomplete="off">
 		  <vectorlink:message/>
 		  <input type="hidden" th:field="*{id}"/>
 		   
 		   <div class="row">	
 				
-			    <div class="col-sm-4  form-group bw-required"  vectorlink:classforerror="district">
+			    <div class="col-sm-8  form-group bw-required"  vectorlink:classforerror="district">
 			      <label for="distrito" class="control-label" >Distrito</label>
 			       <select id="distrito" class="form-control" th:field="*{district}">
 			         <option value="">Selecione o distrito</option> 
 			         <option th:each="distrito : ${districts}" th:value="${distrito.id}" th:text="${distrito.name}"></option>
 			       </select> 
 			    </div> 
+			    
+			     <div class="form-group  col-sm-4   bw-required" vectorlink:classforerror="target">
+					<label for="target" class="control-label">Meta</label>
+					<input id="target" type="number" class="form-control js-plain"  th:field="*{target}"/>
+			  </div>
 			  </div>  
 		  
 			<div class="row">
@@ -53,13 +58,10 @@
 				</div>				
 				
 			</div>
-			<div class="row">
-			  <div class="form-group  col-sm-2   bw-required" vectorlink:classforerror="target">
-					<label for="target" class="control-label">Meta</label>
-					<input id="target" type="text" class="form-control js-plain"  th:field="*{target}"/>
-			</div>
+			
 			 
-			</div>
+			 
+			
 	
 			<button type="submit" class="btn  btn-primary">Salvar</button>				
 		</form>
