@@ -17,6 +17,7 @@ public abstract class DosDetail_ {
 	public static volatile SingularAttribute<DosDetail, String> existeSubreposicao5cm;
 	public static volatile SingularAttribute<DosDetail, TeamLeader> teamLeader;
 	public static volatile SingularAttribute<DosDetail, SprayOperator> sprayOperator;
+	public static volatile SingularAttribute<DosDetail, String> reference;
 	public static volatile SingularAttribute<DosDetail, OperationalSite> operationalSite;
 	public static volatile SingularAttribute<DosDetail, District> district;
 	public static volatile SingularAttribute<DosDetail, String> existeVazamentoBomba;
@@ -28,7 +29,6 @@ public abstract class DosDetail_ {
 	public static volatile SingularAttribute<DosDetail, Village> village;
 	public static volatile SingularAttribute<DosDetail, String> sopMixFor75;
 	public static volatile SingularAttribute<DosDetail, String> todosPertencesForaCasa;
-	public static volatile SingularAttribute<DosDetail, String> referencia;
 
 }
 

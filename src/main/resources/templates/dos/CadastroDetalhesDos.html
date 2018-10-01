@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:vectorlink="http://vectorlink.abt.com"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:data="http://www.thymeleaf.org/extras/data"
 	layout:decorate="~{layout/LayoutPadrao}">
@@ -21,8 +22,8 @@
 			
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/detalhesDos}">
-							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisar</span>
+						<a class="btn  btn-success" th:href="@{/detalhesDos}">
+							<i class="glyphicon  glyphicon-search"></i> <span class="hidden-xs  hidden-sm">Pesquisar</span>
 						</a>
 					</div>
 				</div>
@@ -31,32 +32,48 @@
 	</div>
 <div class="container-fluid">
     <th:block th:include="fragments/MensagemSucesso"></th:block>
-    <form method="POST" th:object="${detalheDos}" th:action="@{/detalhesDos/novo}">
+    <form method="POST" th:object="${dosDetail}" th:action="@{/dosdetalhes/novo}">
       <th:block th:include="fragments/MensagensErroValidacao"></th:block>
-		  <input type="hidden" th:field="*{codigo}"/>
+		  <input type="hidden" th:field="*{id}"/>
 		  
-		  <div class="row">	
-		     <div class="form-group  col-sm-4 bw-required" th:classappend="${#fields.hasErrors('data')} ? has-error">
-					<label class="control-label" for="data">Data</label>
+		   <div class="row">	
+				
+				<div class="form-group  col-sm-4 bw-required" vectorlink:classforerror="data">
+					<label class="control-label" for="data">Data de pulverizacao</label>
 					<input type="text" class="form-control" id="data" th:field="*{data}" 
 					 data-provide="datepicker" data-date-orientation="bottom" data-date-language="pt-BR"
 					 data-date-today-highlight="true" data-date-autoclose="true" autocomplete="off"/>
-			</div>
-			 
-			    <div class="col-sm-4  form-group bw-required" th:classappend="${#fields.hasErrors('distrito')} ? has-error">
-			      <label for="distrito" class="control-label" >Distrito</label>
-			       <select id="distrito" class="form-control" th:field="*{distrito}" >
+		    	</div>
+					   			
+				<div class="col-sm-4  form-group bw-required" vectorlink:classforerror="district">
+			      <label for="district" class="control-label" >Distrito</label>
+			       <select id="district" class="form-control" th:field="*{district}" >
 			         <option value="">Selecione o distrito</option> 
-			         <option th:each="distrito : ${distritos}" th:value="${distrito.codigo}" th:text="${distrito.nome}"></option>
+			         <option th:each="distrito : ${districts}" th:value="${distrito.id}" th:text="${distrito.name}"></option>
 			       </select> 
-			   </div> 
+			    </div> 
 				
-			    <div class="col-sm-4  form-group bw-required"  th:classappend="${#fields.hasErrors('localidade')} ? has-error">
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="operationalSite">
+			      <label for="localidade" class="control-label" >Base Operacional</label>
+			      <div class="bw-field-action">
+			       <input type="hidden" id="inputHiddenOpSiteSelecionada" th:value="*{operationalSite} != null ? *{operationalSite.id}"/>
+			       <select id="operationalSite" class="form-control" data:url="@{/opsites}" th:field="*{operationalSite}">			         
+			     
+			       </select> 
+			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
+			          <img th:src="@{/images/mini-loading.gif}"/>		       
+			       </div>
+			       </div>
+			    </div> 
+			    </div>
+			    
+			    <div class="row">
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="locality">
 			      <label for="localidade" class="control-label" >Localidade</label>
 			      <div class="bw-field-action">
-			       <input type="hidden" id="inputHiddenLocalidadeSelecionada" th:value="*{localidade} != null ? *{localidade.codigo}"/>
-			       <select id="localidade" class="form-control" data:url="@{/localidades}" th:field="*{localidade}">			         
-			           
+			       <input type="hidden" id="inputHiddenLocalidadeSelecionada" th:value="*{locality} != null ? *{locality.id}"/>
+			       <select id="localidade" class="form-control" data:url="@{/localidades}" th:field="*{locality}">			         
+			     
 			       </select> 
 			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
 			          <img th:src="@{/images/mini-loading.gif}"/>		       
@@ -64,11 +81,11 @@
 			       </div>
 			    </div> 
 			    
-			    <div class="col-sm-4  form-group bw-required"  th:classappend="${#fields.hasErrors('bairro')} ? has-error">
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="village">
 			      <label for="bairro" class="control-label" >Bairro</label>
 			      <div class="bw-field-action">
-			       <input type="hidden" id="inputHiddenBairroSelecionado" th:value="*{bairro} != null ? *{bairro.codigo}"/>
-			       <select id="bairro" class="form-control" data:url="@{/bairros}" th:field="*{bairro}">		         
+			       <input type="hidden" id="inputHiddenBairroSelecionado" th:value="*{village} != null ? *{village.id}"/>
+			       <select id="bairro" class="form-control" data:url="@{/bairros}" th:field="*{village}">			         
 			     
 			       </select> 
 			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
@@ -77,62 +94,53 @@
 			       </div>
 			    </div> 
 			    
-			    <div class="col-sm-4  form-group bw-required" th:classappend="${#fields.hasErrors('teamLeaderOuChefeBrigada')} ? has-error">
-			      <label for="actorType" class="control-label" >Chefe da equipe/Supervisor da brigada</label>
-			       <select id="actorType" class="form-control" th:field="*{teamLeaderOuChefeBrigada}" >
-			         <option value="">Selecione</option> 
-			         <option th:each="actorType : ${actorTypes}" th:value="${actorType.codigo}" th:text="${actorType.nome}"></option>
-			       </select> 
-			    </div> 
-			    
-			    
-			    <div class="col-sm-4  form-group bw-required"  th:classappend="${#fields.hasErrors('teamLeaderOuChefeBrigada')} ? has-error">
-			      <label for="actor" class="control-label" >Nome</label>
-			      <div class="bw-field-action">
-			       <input type="hidden" id="inputHiddenActorSelecionado" th:value="*{teamLeaderOuChefeBrigada} != null ? *{teamLeaderOuChefeBrigada.codigo}"/>
-			       <select id="actor" class="form-control" data:url="@{/actores}" th:field="*{teamLeaderOuChefeBrigada}">			         
-			     
+			    <div class="col-sm-4  form-group bw-required" vectorlink:classforerror="teamLeader">
+				      <label for="teamLeader" class="control-label" >Chefe de equipa</label>
+				      <div class="bw-field-action">
+				       <input type="hidden" id="inputHiddeTeamLeaderSelecionado" th:value="*{teamLeader} != null ? *{teamLeader.id}"/>
+				       <select id="teamLeader" class="form-control" data:url="@{/chefe_equipas}" th:field="*{teamLeader}">			         
+				     
 			       </select> 
 			       <div class="bw-field-action__icon js-img-Loading" style="display: none">
 			          <img th:src="@{/images/mini-loading.gif}"/>		       
 			       </div>
 			       </div>
 			    </div> 
-		    	    
-			   
-		 </div> 
+		
+			    
+			    </div>
+	
+		 
 			 <div class="row">
 			   
 			   <div class="table-responsive  bw-tabela-simples">
-	                   <table class="table  table-hover">
+	                   <table class="table  table-hover borders">
 	                      <thead>
 		                    <tr>
-		                      <th>Nome do rociador</th>
-		                      <th>O Roceador misturou o insecticida de modo a fazer 7.5 litros?</th>
-		                      <th>O Roceador enxaguou 3 vezes a garrafa do Actellic vazia com água?</th>
-		                      <th>O Roceador tem o EPI completo?</th>
-		                      <th>O Roceador esta a pulverizar com a bomba contendo a válvula de controlo de fluxo?</th>
-		                      <th>Todos Pertences, Comida, animais/pessoas doentes foram tirados para fora da casa?</th>
-		                      <th>Todos pertences que não podem ser tirados/removidos para fora foram cobertos com plástico? </th>
-		                      <th>Existem vazamento na bomba?</th>
-		                      <th>O Roceador esta pulverizando com 45 cm de distancia do bico a parede?</th>
-		                      <th>O Roceador esta a manter a velocidade correcta de pulverização. Isto é,  2 metros de superfície da parede vertical em 5 segundos?</th>
-		                      <th>Existe uma sobreposição de 5 cm  em cada faixa consecutiva?</th>
+		                      <th class="borders">Nome do rociador</th>
+		                      <th class="borders">O Roceador misturou o insecticida de modo a fazer 7.5 litros?</th>
+		                      <th class="borders">O Roceador enxaguou 3 vezes a garrafa do Actellic vazia com água?</th>
+		                      <th class="borders">O Roceador tem o EPI completo?</th>
+		                      <th class="borders">O Roceador esta a pulverizar com a bomba contendo a válvula de controlo de fluxo?</th>
+		                      <th class="borders">Todos Pertences, Comida, animais/pessoas doentes foram tirados para fora da casa?</th>
+		                      <th class="borders">Todos pertences que não podem ser tirados foram cobertos com plástico? </th>
+		                      <th class="borders">Existem vazamento na bomba?</th>
+		                      <th class="borders">O Roceador esta pulverizando com 45 cm de distancia do bico a parede?</th>
+		                      <th class="borders">O Roceador esta a manter a velocidade correcta de pulverização?</th>
+		                      <th class="borders">Existe uma sobreposição de 5 cm  em cada faixa consecutiva?</th>
 		                    </tr>                    
 	                       </thead>
 		                   <tbody>
 		                       <tr>
 		                       
 		                          <td>
-		                              <select id="roceador" class="form-control" th:field="*{roceador}" >
-								         <option value="">Selecione</option> 
-								         <option th:each="actor : ${actores}" th:value="${actor.codigo}" th:text="${actor.nome}"></option>
-								       </select> 
-		                          </td>
+		                              <input type="hidden" id="inputHiddenRoceadorSelecionado" th:value="*{sprayOperator} != null ? *{sprayOperator.id}"/>
+								       <select id="sop" class="form-control" data:url="@{/roceadores}" th:field="*{sprayOperator}"></select> 
+						         </td>
 		                         <td>
 		                            
 		                             <select id="sopMixFor75" class="form-control" th:field="*{sopMixFor75}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                         </select>
@@ -141,14 +149,14 @@
 		                         </td>
 		                          <td>
 		                           <select id="sopEnxaugou3vezes" class="form-control" th:field="*{sopEnxaugou3vezes}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
 		                         </td>     
 		                         <td>
 		                           <select id="sopTemEPICompleto" class="form-control" th:field="*{sopTemEPICompleto}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -156,7 +164,7 @@
 		                         
 		                         <td>
 		                           <select id="sopPulvComBombaComCntFluxo" class="form-control" th:field="*{sopPulvComBombaComCntFluxo}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -164,7 +172,7 @@
 		                         
 		                         <td>
 		                           <select id="todosPertencesForaCasa" class="form-control" th:field="*{todosPertencesForaCasa}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -172,7 +180,7 @@
 		                         
 		                         <td>
 		                           <select id="todosPertencesNTiradosCobertos" class="form-control" th:field="*{todosPertencesNTiradosCobertos}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -180,7 +188,7 @@
 		                         
 		                         <td>
 		                           <select id="existeVazamentoBomba" class="form-control" th:field="*{existeVazamentoBomba}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -188,7 +196,7 @@
 		                         
 		                         <td>
 		                           <select id="sopPulvComDist45cmParede" class="form-control" th:field="*{sopPulvComDist45cmParede}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -196,7 +204,7 @@
 		                         
 		                         <td>
 		                           <select id="sopMantemVelocCorrecta" class="form-control" th:field="*{sopMantemVelocCorrecta}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -204,7 +212,7 @@
 		                         
 		                         <td>
 		                           <select id="existeSubreposicao5cm" class="form-control" th:field="*{existeSubreposicao5cm}" >
-			                          <option value="">Opções</option> 
+			                          <option value=""></option> 
 			                          <option th:value="Sim">Sim</option>
 			                          <option th:value="Nao">Não</option>
 			                        </select>		                         
@@ -226,9 +234,11 @@
    </div>
   </section>
   <th:block layout:fragment="javascript-extra">
-   	<script th:src="@{/javascripts/mozirs.combos-distrito-localidade-bairro.js}"></script>
-   	<script th:src="@{/javascripts/mozirs.combo-actortype-actor.js}"></script>   
-	<script th:src="@{/javascripts/dos.butoes.js}"></script>  
+   	<script th:src="@{/javascripts/vectorlink.combo-distrito-localidade-bairro.js}"></script>
+	<script th:src="@{/javascripts/vectorlink.combos-roceador-distrito.js}"></script> 
+	<script th:src="@{/javascripts/vectorLink.combo-distrito-teamLeader.js}"></script> 
+	<script th:src="@{/javascripts/vectorlink.combos-roceador-distrito.js}"></script>
+</th:block>
    	
 </th:block>
  </html>  			  

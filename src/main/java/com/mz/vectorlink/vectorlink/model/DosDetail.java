@@ -3,6 +3,7 @@ package com.mz.vectorlink.vectorlink.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,7 +58,8 @@ public class DosDetail implements Serializable {
 	@NotNull
 	private String existeSubreposicao5cm;
 	
-	private String referencia;
+	@Column(name = "referencia")
+	private String reference;
 	
 	@ManyToOne
 	@JoinColumn(name = "dos_totals-id")
@@ -208,12 +210,12 @@ public class DosDetail implements Serializable {
 		this.district = district;
 	}
 	
-	public String getReferencia() {
-		return referencia;
+	public String getReference() {
+		return reference;
 	}
 
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 
 	public TeamLeader getTeamLeader() {

@@ -3,6 +3,7 @@ package com.mz.vectorlink.vectorlink.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,64 +29,83 @@ public class DosTotal implements Serializable {
 		private LocalDate data;
 		
 		@NotNull
+		@Column(name = "sopmixforsim")
 		private Long SOPMixFor75Sim;
 		
 		@NotNull
+		@Column(name = "sopmixfornao")
 		private Long SOPMixFor75Nao;
 		    
 		@NotNull
+		@Column(name = "enxaugoutvezessim")
 	    private Long SOPEnxaugou3vezesSim;
 		
 		@NotNull
+		@Column(name = "enxaugoutvezesnao")
 	    private Long SOPEnxaugou3vezesNao;
 		    
 		@NotNull
+		@Column(name = "temepicompletosim")
 	    private Long SOPTemEPICompletoSim;
 		    
 		@NotNull
+		@Column(name = "temepicompletonao")
 		private Long SOPTemEPICompletoNao;
 		    
 		@NotNull
-
+        @Column(name = "pulvcombombacntflxsim")
 		private Long SOPPulvComBombaComCntFluxoSim;
 		    
 		@NotNull
+		@Column(name = "pulvcombombacntflxnao")
 		private Long SOPPulvComBombaComCntFluxoNao;
 		 
 		@NotNull
+		@Column(name = "todospertencesforasim")
 		private Long todosPertencesForaCasaSim;
 		  
 		@NotNull
+		@Column(name = "todospertencesforanao")
 		private Long todosPertencesForaCasaNao;
 		  
 		@NotNull
+		@Column(name = "pertencescobertossim")
 		private Long todosPertencesNTiradosCobertosSim;
 		  
 		@NotNull
+		@Column(name = "pertencescobertosnao")
 	    private Long todosPertencesNTiradosCobertosNao;
 		 
 		@NotNull
+		@Column(name = "vazamentosim")
 		private Long existeVazamentoBombaSim;
 		 
 		@NotNull
+		@Column(name = "vazamentonao")
 		private Long existeVazamentoBombaNao;
 		    
 		@NotNull
+		@Column(name = "pulvdistquarentacincsim")
 		private Long SOPPulvComDist45cmParedeSim;
 		    
 		@NotNull
+		@Column(name = "pulvdistquarentacincnao")
 		private Long SOPPulvComDist45cmParedeNao;
 		    
 		@NotNull
+		@Column(name = "velocidadecorrectasim")
 		private Long SOPMantemVelocCorrectaSim;
 		   
 		@NotNull
+		@Column(name = "velocidadecorrectanao")
 		private Long SOPMantemVelocCorrectaNao;
 		    
 		@NotNull
+		@Column(name = "subreposicaosim")
 		private Long existeSubreposicao5cmSim;
 		    
 		@NotNull
+		@Column(name = "subreposicaonao")
 		private Long existeSubreposicao5cmNao;
 		
 		private String referencia;

@@ -23,7 +23,7 @@
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
 						<a class="btn  btn-success" th:href="@{/dosTotais}">
-							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+							<i class="glyphicon  glyphicon-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
 					</div>
 				</div>
@@ -113,20 +113,20 @@
 		 
 		      
 		          <div class="row">
-		            <div class="table-responsive  bw-tabela-simples">
+		            <div class="table-responsive  bw-tabela-simples borders">
 		              <table class="table  table-hover">
 		                 <thead>
 		                    <tr>
-		                      <th>O Roceador misturou o insecticida de modo a fazer 7.5 litros?</th>
-		                      <th>O Roceador enxaguou 3 vezes a garrafa do Actellic vazia com água?</th>
-		                      <th>O Roceador tem o EPI completo?</th>
-		                      <th>O Roceador esta a pulverizar com a bomba contendo a válvula de controlo de fluxo?</th>
-		                      <th>Todos Pertences, Comida, animais/pessoas doentes foram tirados para fora da casa?</th>
-		                      <th>Todos pertences que não podem ser tirados/removidos para fora foram cobertos com plástico? </th>
-		                      <th>Existem vazamento na bomba?</th>
-		                      <th>O Roceador esta pulverizando com 45 cm de distancia do bico a parede?</th>
-		                      <th>O Roceador esta a manter a velocidade correcta de pulverização. Isto é,  2 metros de superfície da parede vertical em 5 segundos?</th>
-		                      <th>Existe uma sobreposição de 5 cm  em cada faixa consecutiva?</th>
+		                      <th class="borders">O Roceador misturou o insecticida de modo a fazer 7.5 litros?</th>
+		                      <th class="borders">O Roceador enxaguou 3 vezes a garrafa do Actellic vazia com água?</th>
+		                      <th class="borders">O Roceador tem o EPI completo?</th>
+		                      <th class="borders">O Roceador esta a pulverizar com a bomba contendo a válvula de controlo de fluxo?</th>
+		                      <th class="borders">Todos Pertences, Comida, animais/pessoas doentes foram tirados para fora da casa?</th>
+		                      <th class="borders">Todos pertences que não podem ser tirados foram cobertos com plástico? </th>
+		                      <th class="borders">Existem vazamento na bomba?</th>
+		                      <th class="borders">O Roceador esta pulverizando com 45 cm de distancia do bico a parede?</th>
+		                      <th class="borders">O Roceador esta a manter a velocidade correcta de pulverização?</th>
+		                      <th class="borders">Existe uma sobreposição de 5 cm  em cada faixa consecutiva?</th>
 		                    </tr>
 	                    </thead>
 	                     
@@ -134,41 +134,63 @@
 		              
 		            </div>
 		        
-		          <div class="table-responsive  bw-tabela-simples">
-		             <table class="table  table-hover">
+		          <div class="table-responsive  bw-tabela-simples borders">
+		             <table class="table  table-hover borders">
 		              <thead>
 	                    <tr>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>
-	                      <th>Sim</th>
-	                      <th>Não</th>	                      
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                      <th class="borders">Sim</th>
+	                      <th class="borders">Não</th>
+	                                  
 	                     
 	                    </tr>
 	                  </thead>
 	                  <tbody>
-	                  
-	                  
+	                   <tr> 
+	                     <td class="borders"><input type="number" class="form-control" id="SOPMixFor75Sim" th:field="*{SOPMixFor75Sim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPMixFor75Nao" th:field="*{SOPMixFor75Nao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPEnxaugou3vezesSim" th:field="*{SOPEnxaugou3vezesSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPEnxaugou3vezesNao" th:field="*{SOPEnxaugou3vezesNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPTemEPICompletoSim" th:field="*{SOPTemEPICompletoSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPTemEPICompletoNao" th:field="*{SOPTemEPICompletoNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPPulvComBombaComCntFluxoSim" th:field="*{SOPPulvComBombaComCntFluxoSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPPulvComBombaComCntFluxoNao" th:field="*{SOPPulvComBombaComCntFluxoNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="todosPertencesForaCasaSim" th:field="*{todosPertencesForaCasaSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="todosPertencesForaCasaNao" th:field="*{todosPertencesForaCasaNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="todosPertencesNTiradosCobertosSim" th:field="*{todosPertencesNTiradosCobertosSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="todosPertencesNTiradosCobertosNao" th:field="*{todosPertencesNTiradosCobertosNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="existeVazamentoBombaSim" th:field="*{existeVazamentoBombaSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="existeVazamentoBombaNao" th:field="*{existeVazamentoBombaNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPPulvComDist45cmParedeSim" th:field="*{SOPPulvComDist45cmParedeSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPPulvComDist45cmParedeNao" th:field="*{SOPPulvComDist45cmParedeNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPMantemVelocCorrectaSim" th:field="*{SOPMantemVelocCorrectaSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="SOPMantemVelocCorrectaNao" th:field="*{SOPMantemVelocCorrectaNao}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="existeSubreposicao5cmSim" th:field="*{existeSubreposicao5cmSim}"/></td>
+	                     <td class="borders"><input type="number" class="form-control" id="existeSubreposicao5cmNao" th:field="*{existeSubreposicao5cmNao}"/></td>
+	                     
+	                   </tr>
 	                  </tbody>
 		             </table>
 		          </div>
 		        </div>	     
-			
+			<br>
 		
 		  <button class="btn btn-primary">Salvar</button>		
 		

@@ -11,7 +11,7 @@ import com.mz.vectorlink.vectorlink.model.Village;
 
 public class DosDetailsFilter {
 	
-private LocalDate dataInicio;
+    private LocalDate dataInicio;
 	
 	private LocalDate dataFim;
 	

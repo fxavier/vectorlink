@@ -9,5 +9,7 @@ import com.mz.vectorlink.vectorlink.repository.filter.DosTotalFilter;
 public interface DosTotalRepositoryQueries {
 	
 	public Page<DosTotal> filtrar(DosTotalFilter filtro, Pageable pageable);
+	
+	public DosTotal findByDosDetailsReferencia(String referencia);
 
 }
